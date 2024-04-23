@@ -1,5 +1,6 @@
 #balance {
-    background-color: #9baadd;
+    background-color: #172141;
+    color: #FFFFFF;
     width: 285px;
     height: 95px;
     border-radius: 10px;
@@ -7,4 +8,16 @@
     padding-right: 18px;
     padding-top: 9px;
     padding-bottom: 9px;
+}
+
+#currencyLabel {
+    font-size: 16px;
+    font-weight: 400;
+    padding-bottom: 5px;
+    text-align: left;
+}
+#amountLabel {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: left;
 }
