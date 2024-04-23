@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css";
 
 export default function Navbar(){
     return(
-        <nav>
-            <ul>
+        <nav className={styles.navContainer}>
+            <h1>E-Gringgots</h1>
+            <ul className={styles.navLinks}>
                 <li>
                     <Link to={``}>Home</Link>
                 </li>
