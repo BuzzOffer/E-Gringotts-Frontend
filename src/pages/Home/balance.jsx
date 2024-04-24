@@ -14,7 +14,6 @@ function Balance() {
                     <h3 id="currencyLabel">{item.currency}</h3>
                 </button>
             ))}
-
         </div>
     );
 }
