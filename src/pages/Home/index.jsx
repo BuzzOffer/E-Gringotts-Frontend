@@ -8,6 +8,7 @@ export default function Home(){
         <>
             <h1>Home</h1>
             <Welcome />
+            <h2 id="sectionMessage">Balance</h2>
             <Balance />
             <NavButtons />
         </>

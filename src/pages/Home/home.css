@@ -41,6 +41,10 @@
     font-size: 15px;
 }
 
+#sectionMessage {
+    margin: 10px 30px;
+}
+
 
 .balanceButtons {
     display: grid;
@@ -58,4 +62,5 @@
 
 .welcomeMessage {
     margin: 10px 30px;
+    font-size: 2.5rem;
 }
