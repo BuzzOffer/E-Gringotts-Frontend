@@ -74,3 +74,10 @@
     margin: 10px 30px;
     font-size: 2.5rem;
 }
+
+.currencyConverter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 30px 100px;
+}
