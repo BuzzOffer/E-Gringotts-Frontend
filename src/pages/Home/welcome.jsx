@@ -1,7 +1,7 @@
 function Welcome() {
     let user = "Simon Goh"
     return (
-        <h2>Welcome, {user}</h2>
+        <h2 className="welcomeMessage">Welcome, {user}</h2>
     );
 }
 

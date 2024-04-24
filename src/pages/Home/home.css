@@ -25,12 +25,6 @@
     border-color: #DFA616;
 }
 
-.balanceButtons {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
 #navbutton {
     background-color: #172141;
     color: #FFFFFF;
@@ -46,9 +40,22 @@
 #navLabel {
     font-size: 15px;
 }
+
+
+.balanceButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 15px 30px;
+}
+
 .navButtons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin: 30px 100px;
+}
+
+.welcomeMessage {
+    margin: 10px 30px;
 }
