@@ -1,27 +1,34 @@
 #balance {
     background-color: #172141;
     color: #FFFFFF;
-    width: 285px;
-    height: 95px;
+    /* width: 285px; */
+    /* height: 95px; */
     border-radius: 10px;
     padding-left: 18px;
     padding-right: 18px;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+
+    justify-items: stretch;
 }
 
 #currencyLabel {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
-    padding-bottom: 5px;
-    text-align: left;
+    /* padding-bottom: 5px; */
 }
 #amountLabel {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
-    text-align: left;
 }
 
 #balance:focus {
     border-color: #DFA616;
+}
+
+.balanceButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }

@@ -7,11 +7,12 @@ const balances = [
 function Balance() {
 
     return (
-        <div>
+        <div className="balanceButtons">
             {balances.map((item) => (
                 <button id="balance" key={item.currency}>
-                    <h3 id="currencyLabel">{item.currency}</h3>
+                    {/* <h3 id="currencyLabel">{item.currency}</h3> */}
                     <h1 id="amountLabel">{item.balance.toFixed(2)}</h1>
+                    <h3 id="currencyLabel">{item.currency}</h3>
                 </button>
             ))}
 

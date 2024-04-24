@@ -1,6 +1,4 @@
 import Welcome from './welcome.jsx'
-import BalanceGalleon from './balanceGalleon.jsx';
-import BalanceSickle from './balanceSickle.jsx';
 import Balance from './balance.jsx';
 import './home.css'
 
