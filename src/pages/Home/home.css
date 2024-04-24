@@ -45,6 +45,16 @@
     margin: 10px 30px;
 }
 
+#currencyDropDown {
+    background-color: #172141;
+    color: #FFFFFF;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 10px;
+
+    justify-items: stretch;
+}
+
 
 .balanceButtons {
     display: grid;
