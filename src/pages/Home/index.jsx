@@ -2,6 +2,7 @@ import Welcome from './welcome.jsx'
 import Balance from './balance.jsx';
 import NavButtons from './navbuttons.jsx';
 import FromMenu from './frommenu.jsx';
+import ToMenu from './tomenu.jsx';
 import './home.css'
 
 export default function Home(){
@@ -12,7 +13,10 @@ export default function Home(){
             <h2 id="sectionMessage">Balance</h2>
             <Balance />
             <NavButtons />
-            <FromMenu />
+            <div className="currencyConverter">
+                <FromMenu />
+                <ToMenu />
+            </div>
         </>
     );
 }
