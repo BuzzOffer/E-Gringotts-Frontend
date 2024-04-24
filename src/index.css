@@ -3,6 +3,7 @@
 :root {
   /* Colors */
   --main-background-clr: #0B1432;
+  --background-clr-lighter: #172141;
   --primary-clr: #DFA616;
   --gray-placeholder-clr: #A1A1A1;
 }
