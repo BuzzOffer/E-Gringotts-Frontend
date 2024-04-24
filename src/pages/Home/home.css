@@ -1,8 +1,6 @@
 #balance {
     background-color: #172141;
     color: #FFFFFF;
-    /* width: 285px; */
-    /* height: 95px; */
     border-radius: 10px;
     padding-left: 18px;
     padding-right: 18px;
@@ -31,4 +29,26 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+}
+
+#navbutton {
+    background-color: #172141;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+
+    justify-items: stretch;
+}
+#navLabel {
+    font-size: 15px;
+}
+.navButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 30px 100px;
 }
