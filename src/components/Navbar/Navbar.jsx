@@ -18,6 +18,10 @@ export default function Navbar(){
                     <li key={item.label}>
                         <NavLink
                             to={`${item.href}`}
+                            style={({ isActive }) => isActive ? {
+                                color: 'var(--primary-clr)',
+                                fontWeight: '500',
+                            } : {}}
                         >
                             {item.label}
                         </NavLink>
