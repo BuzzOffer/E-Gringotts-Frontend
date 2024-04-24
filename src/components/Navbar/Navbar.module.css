@@ -16,12 +16,16 @@ h1{
     font-size: 1.3rem;
 }
 
+li{
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
+li:hover{
+    background-color: var(--background-clr-lighter);
+}
+
 a{
     text-decoration: none;
     color: white;
-}
-
-.activeLink{
-    color: red;
-    font-weight: bold;
 }
