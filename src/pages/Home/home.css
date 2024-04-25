@@ -81,6 +81,14 @@
 .currencyConverter {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+    ". . merged"
+    ". . merged";
     gap: 1.5rem;
     margin: 15px 30px;
+}
+
+.merged {
+    grid-area: "merged";
 }

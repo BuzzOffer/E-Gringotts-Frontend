@@ -16,6 +16,7 @@ export default function Home(){
             <div className="currencyConverter">
                 <FromMenu />
                 <ToMenu />
+                <div className="merged"></div>
             </div>
         </>
     );
