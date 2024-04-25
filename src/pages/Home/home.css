@@ -38,6 +38,7 @@
 }
 #navbutton svg {
     fill: #FFFFFF;
+    margin: auto;
 }
 #navLabel {
     font-size: 15px;
