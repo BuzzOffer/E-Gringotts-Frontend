@@ -36,6 +36,9 @@
 
     justify-items: stretch;
 }
+#navbutton svg {
+    fill: #FFFFFF;
+}
 #navLabel {
     font-size: 15px;
 }
