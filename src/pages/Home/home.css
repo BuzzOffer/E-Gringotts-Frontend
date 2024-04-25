@@ -14,7 +14,6 @@
 #currencyLabel {
     font-size: 20px;
     font-weight: 400;
-    /* padding-bottom: 5px; */
 }
 #amountLabel {
     font-size: 40px;
@@ -50,6 +49,7 @@
     color: #FFFFFF;
     font-size: 1rem;
     padding: 10px;
+    padding-right: 200px;
     border-radius: 10px;
 
     justify-items: stretch;
@@ -79,5 +79,5 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    margin: 30px 100px;
+    margin: 15px 30px;
 }
