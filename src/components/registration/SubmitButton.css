@@ -8,7 +8,7 @@
     font-size: 16px; /* Adjust as needed */
     font-weight: bold; /* Makes the text bold */
     cursor: pointer; /* Changes cursor to pointer when hovering over the button */
-    width: 40%; /* Assuming button should be the same width as the inputs */
+    width: 80%; /* Assuming button should be the same width as the inputs */
     margin: 10px auto; /* Centers the button and adds space above and below */
     display: block; /* Makes the width effective by setting the element to block */
     text-transform: uppercase; /* Makes the button text uppercase */
