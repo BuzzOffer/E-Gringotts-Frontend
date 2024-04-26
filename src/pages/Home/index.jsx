@@ -5,6 +5,7 @@ import FromMenu from './frommenu.jsx';
 import ToMenu from './tomenu.jsx';
 import CurrencyRate from './currencyrate.jsx';
 import Amount from './amount.jsx';
+import ConvertButtons from './convertbuttons.jsx';
 import './home.css'
 
 export default function Home(){
@@ -22,6 +23,7 @@ export default function Home(){
                     <CurrencyRate />
                 </div>
                 <Amount />
+                <ConvertButtons />
             </div>
         </>
     );

@@ -59,6 +59,12 @@
     border: none;
 }
 
+#convertButtons {
+    color: #FFFFFF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
 
 .balanceButtons {
     display: grid;
@@ -105,4 +111,11 @@
 .toCurrency {
     font-size: 60px;
     color: #DFA616;
+}
+
+.convert {
+    background-color: #355DD4;
+}
+.confirm {
+    background-color: #DFA616;
 }
