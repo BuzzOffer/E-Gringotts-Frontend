@@ -12,6 +12,7 @@
     margin: 10px auto; /* Centers the button and adds space above and below */
     display: block; /* Makes the width effective by setting the element to block */
     text-transform: uppercase; /* Makes the button text uppercase */
+    border-radius: 20px;
   }
   
   .submit-button:hover {
