@@ -1,0 +1,26 @@
+.text-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    /* Space between each input */
+    width: 80%;
+    /* Adjust width as needed */
+}
+
+.text-input label {
+    margin-bottom: 5px;
+    /* Space between label and input */
+    color: #FFFFFF;
+    /* Assuming labels are white */
+    text-align: left;
+}
+
+.text-input input {
+    padding: 10px;
+    border: 1px solid var(--medium-yellow);
+    /* White border for the input */
+    background-color: #172964;
+    /* Adjusted to your medium blue color */
+    color: #FFFFFF;
+    /* Text color */
+}
