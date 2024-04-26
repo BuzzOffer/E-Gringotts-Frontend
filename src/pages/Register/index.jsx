@@ -1,7 +1,7 @@
 import FormTitle from '../../components/registration/FormTitle'
 import React, { useState } from 'react';
 import TextInput from '../../components/registration/TextInput';
-import './Register.css';
+import '../../components/registration/Form.css';
 
 function RegisterScreen() {
     const [email, setEmail] = useState('');
@@ -24,7 +24,6 @@ function RegisterScreen() {
 
     return (
         <div className="form-container">
-
             <form onSubmit={handleSubmit}>
                 <FormTitle text="Register" />
                 <TextInput label="Email" type="email" placeholder="Enter your email here" name="email" value={email} onChange={handleChange} />
