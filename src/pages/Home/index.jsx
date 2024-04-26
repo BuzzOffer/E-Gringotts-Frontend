@@ -16,6 +16,7 @@ export default function Home(){
             <h2 id="sectionMessage">Balance</h2>
             <Balance />
             <NavButtons />
+            <h2 id="sectionMessage">Currency Converter</h2>
             <div className="currencyConverter">
                 <FromMenu />
                 <ToMenu />
