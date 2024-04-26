@@ -1,0 +1,21 @@
+/* SubmitButton.css */
+.submit-button {
+    background-color: var(--dark-yellow); /* This is a placeholder; replace with the actual color from your palette */
+    color: var(--white); /* Dark text, replace with the actual color if different */
+    border: none; /* No border */
+    border-radius: 5px; /* Adjust for desired curvature of corners */
+    padding: 15px 30px; /* Vertical and horizontal padding, adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    font-weight: bold; /* Makes the text bold */
+    cursor: pointer; /* Changes cursor to pointer when hovering over the button */
+    width: 40%; /* Assuming button should be the same width as the inputs */
+    margin: 10px auto; /* Centers the button and adds space above and below */
+    display: block; /* Makes the width effective by setting the element to block */
+    text-transform: uppercase; /* Makes the button text uppercase */
+  }
+  
+  .submit-button:hover {
+    background-color: var(--medium-yellow); /* Lighter shade for hover effect, replace with the actual color */
+    /* You can add other hover effects like changing the color or adding a box-shadow */
+  }
+  

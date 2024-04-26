@@ -2,6 +2,7 @@ import FormTitle from '../../components/registration/FormTitle'
 import React, { useState } from 'react';
 import TextInput from '../../components/registration/TextInput';
 import '../../components/registration/Form.css';
+import SubmitButton from '../../components/registration/SubmitButton';
 
 function RegisterScreen() {
     const [email, setEmail] = useState('');
@@ -30,6 +31,8 @@ function RegisterScreen() {
                 <TextInput label="Name" type="text" placeholder="Enter your name here" name="name" value={name} onChange={handleChange} />
                 <TextInput label="Password" type="password" placeholder="Enter your password here" name="password" value={password} onChange={handleChange} />
                 <TextInput label="Confirm Password" type="password" placeholder="Enter your password again" name="confirmPassword" value={confirmPassword} onChange={handleChange} />
+                <SubmitButton text="Register"/>
+
             </form></div>
     );
 }
