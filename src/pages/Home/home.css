@@ -61,9 +61,13 @@
 
 #convertButtons {
     color: #FFFFFF;
+    font-size: 1rem;
     padding: 10px;
     text-align: center;
     border-radius: 10px;
+    width: 40%;
+    margin: 5px 10px;
+    border: none;
 }
 
 .balanceButtons {
@@ -118,4 +122,8 @@
 }
 .confirm {
     background-color: #DFA616;
+}
+
+.conButtonDiv {
+    text-align: center;
 }
