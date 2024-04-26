@@ -3,6 +3,7 @@ import Balance from './balance.jsx';
 import NavButtons from './navbuttons.jsx';
 import FromMenu from './frommenu.jsx';
 import ToMenu from './tomenu.jsx';
+import CurrencyRate from './currencyrate.jsx';
 import './home.css'
 
 export default function Home(){
@@ -16,7 +17,9 @@ export default function Home(){
             <div className="currencyConverter">
                 <FromMenu />
                 <ToMenu />
-                <div className="merged"></div>
+                <div className="merged">
+                    <CurrencyRate />
+                </div>
             </div>
         </>
     );

@@ -88,7 +88,14 @@
     gap: 1.5rem;
     margin: 15px 30px;
 }
-
+.currencyRate {
+    
+}
 .merged {
-    grid-area: "merged";
+    grid-area: merged;
+    background-color: #172141;
+    justify-self: stretch;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
 }
