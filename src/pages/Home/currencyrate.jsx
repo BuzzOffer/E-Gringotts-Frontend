@@ -1,7 +1,8 @@
 function currencyRate() {
     return (
         <div className="currencyRate">
-            <h1>1 Sickle = 0.29 Knut</h1>
+            <h3 className="fromCurrency">1.00 Sickle = </h3>
+            <h1 className="toCurrency">29 Knut</h1>
         </div>
     );
 }

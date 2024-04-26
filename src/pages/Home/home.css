@@ -88,9 +88,7 @@
     gap: 1.5rem;
     margin: 15px 30px;
 }
-.currencyRate {
-    
-}
+
 .merged {
     grid-area: merged;
     background-color: #172141;
@@ -98,4 +96,12 @@
     text-align: center;
     border-radius: 10px;
     padding: 10px;
+}
+
+.fromCurrency {
+    font-size: 24px;
+}
+.toCurrency {
+    font-size: 60px;
+    color: #DFA616;
 }
