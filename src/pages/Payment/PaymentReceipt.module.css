@@ -1,0 +1,50 @@
+.receiptContainer{
+    background-color: var(--background-clr-lighter);
+    margin: 1rem 20rem;
+    padding: 3rem 4.5rem;
+    border: 1px solid white;
+    border-radius: 20px;
+    font-size: 1.3rem;
+}
+
+.statusContainer{
+    margin: 2.5rem 0;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 2.2rem;
+}
+
+.amount{
+    font-weight: bold;
+}
+
+.status{
+    font-weight: 300;
+    color: var(--gray-placeholder-clr);
+    font-size: 1.5rem;
+}
+
+.tickIcon{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.detailsContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.label{
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.continueBtn{
+    border: 0;
+    border-radius: 30px;
+    padding: 0.8rem 0;
+    width: 100%;
+    color: white;
+    background-color: var(--primary-clr);
+}
