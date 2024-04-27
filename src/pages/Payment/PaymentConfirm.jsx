@@ -1,6 +1,12 @@
+import { useNavigate } from 'react-router-dom'
 import styles from './PaymentConfirm.module.css'
 
 export default function PaymentConfirm(){
+    const navigate = useNavigate();
+     function onConfirmClick(){
+        navigate("/payment/confirmation/receipt")
+    }
+
     return (
         <>
             <h1>Payment Confirmation</h1>
@@ -50,7 +56,12 @@ export default function PaymentConfirm(){
 
                 <section className={styles.buttonContainer}>
                     <button className={styles.cancelBtn} type='button'>Cancel</button>
-                    <button type='button'>Confirm</button>
+                    <button 
+                        type='button' 
+                        onClick={onConfirmClick}
+                    >
+                        Confirm
+                    </button>
                 </section>
             </div>
         </>
