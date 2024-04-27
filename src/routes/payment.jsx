@@ -1,6 +1,7 @@
 import Payment from '../pages/Payment';
 import PaymentConfirm from "../pages/Payment/PaymentConfirm";
 import PaymentList from "../pages/Payment/PaymentList";
+import PaymentReceipt from "../pages/Payment/PaymentReceipt";
 
 export const PaymentRoute = {
     path: "payment",
@@ -9,7 +10,14 @@ export const PaymentRoute = {
       { index: true, element: <PaymentList /> },
       {
         path: "confirmation",
-        element: <PaymentConfirm />
+        element: <Payment />,
+        children:[
+          { index: true, element: <PaymentConfirm /> },
+          {
+            path: "receipt",
+            element: <PaymentReceipt />
+          }
+        ]
       }
     ]
 }
