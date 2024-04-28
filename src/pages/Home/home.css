@@ -1,0 +1,130 @@
+#balance {
+    background-color: #172141;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+
+    justify-items: stretch;
+}
+
+#currencyLabel {
+    font-size: 20px;
+    font-weight: 400;
+}
+#amountLabel {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#balance:focus {
+    border-color: #DFA616;
+}
+
+#navbutton {
+    background-color: #172141;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+
+    justify-items: stretch;
+}
+#navbutton svg {
+    fill: #FFFFFF;
+    margin: auto;
+}
+#navLabel {
+    font-size: 15px;
+}
+
+#sectionMessage {
+    margin: 10px 30px;
+    font-weight: lighter;
+}
+
+#currencyDropDown {
+    background-color: #172141;
+    color: #FFFFFF;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 5px 0px;
+    border: none;
+}
+
+#convertButtons {
+    color: #FFFFFF;
+    font-size: 1rem;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    width: 40%;
+    margin: 5px 10px;
+    border: none;
+}
+
+.balanceButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 15px 30px;
+}
+
+.navButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 30px 100px;
+}
+
+.welcomeMessage {
+    margin: 10px 30px;
+    font-size: 2.5rem;
+}
+
+.currencyConverter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+    ". . merged"
+    ". . merged";
+    gap: 1.5rem;
+    margin: 15px 30px;
+}
+
+.merged {
+    grid-area: merged;
+    background-color: #172141;
+    justify-self: stretch;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.fromCurrency {
+    font-size: 24px;
+}
+.toCurrency {
+    font-size: 60px;
+    color: #DFA616;
+}
+
+.convert {
+    background-color: #355DD4;
+}
+.confirm {
+    background-color: #DFA616;
+}
+
+.conButtonDiv {
+    text-align: center;
+}
