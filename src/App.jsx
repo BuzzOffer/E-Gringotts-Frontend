@@ -1,4 +1,4 @@
-import './App.css'
+import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Transaction from './pages/Transaction/index.jsx'
 import Payment from './pages/Payment/index.jsx'
