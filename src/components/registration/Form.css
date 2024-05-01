@@ -1,0 +1,17 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full height */
+    background-color: var(--dark-blue); /* Dark blue background */
+
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* This centers the child elements (text inputs) horizontally */
+        width: 60%;
+    }
+
+    
+  }

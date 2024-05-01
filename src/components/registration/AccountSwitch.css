@@ -1,0 +1,18 @@
+/* AccountSwitch.css */
+.account-switch {
+    text-align: center;
+    margin-top: 20px; /* Space above the switch message */
+    color: var(--white); /* Assuming white text color for the static text */
+  }
+  
+  .account-switch .login-link {
+    color: var(--dark-yellow); /* Replace with the actual color for the hyperlink */
+    text-decoration: none;
+    margin-left: 5px; /* Spacing between the text and link */
+    font-weight: bold;
+  }
+  
+  .account-switch .login-link:hover {
+    text-decoration: underline;
+    color: var(--light-yellow); 
+  }
