@@ -1,3 +1,5 @@
+import { Outlet } from "react-router-dom";
+
 export default function Payment(){
-    return <h1>Payment</h1>
+    return <Outlet />
 }
