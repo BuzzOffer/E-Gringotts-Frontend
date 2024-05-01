@@ -1,6 +1,12 @@
 /* Global CSS that applies to the entire application */
 
 :root {
+  /* Colors */
+  --main-background-clr: #0B1432;
+  --background-clr-lighter: #172141;
+  --primary-clr: #DFA616;
+  --gray-placeholder-clr: #A1A1A1;
+  
   --dark-blue: #0B1432;
   --medium-blue: #172964;
   --light-blue: #1E3685;
