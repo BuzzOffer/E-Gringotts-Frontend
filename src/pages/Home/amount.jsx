@@ -3,7 +3,7 @@ function Amount() {
         <div>
             <label for="amount" className="converterLabel">Amount</label>
             <br></br>
-            <input type="number" name="amount" className="currencyDropDown" max="100000" placeholder="Enter Amount">
+            <input type="number" id="amount" name="amount" className="currencyDropDown" max="100000" placeholder="Enter Amount">
                 
             </input>
         </div>
