@@ -1,9 +1,9 @@
 function Amount() {
     return (
         <div>
-            <label for="amount" id="converterLabel">Amount</label>
+            <label for="amount" className="converterLabel">Amount</label>
             <br></br>
-            <input type="number" name="amount" id="currencyDropDown" max="100000" placeholder="Enter Amount">
+            <input type="number" name="amount" className="currencyDropDown" max="100000" placeholder="Enter Amount">
                 
             </input>
         </div>

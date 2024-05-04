@@ -49,7 +49,7 @@
     font-weight: lighter;
 }
 
-#currencyDropDown {
+.currencyDropDown {
     background-color: #172141;
     color: #FFFFFF;
     font-size: 1rem;
@@ -110,10 +110,10 @@
     padding: 10px;
 }
 
-#fromCurrency {
+#fromValue {
     font-size: 24px;
 }
-#toCurrency {
+#toValue {
     font-size: 60px;
     color: #DFA616;
 }
