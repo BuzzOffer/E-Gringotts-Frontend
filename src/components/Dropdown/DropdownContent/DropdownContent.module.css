@@ -1,0 +1,23 @@
+.contentContainer{
+    background-color: var(--background-clr-lighter);
+    margin-top: 5px;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    position: relative;
+    opacity: 0;
+}
+
+.contentContainerOpen{
+    opacity: 1;
+}
+
+.option{
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.option:hover{
+    background-color: #222E58;
+}
