@@ -2,8 +2,8 @@ function ConvertButtons() {
     return (
         <div className="conButtonDiv">
             <br></br>
-            <button id="convertButtons" className="convert">Convert</button>
-            <button id="convertButtons" className="confirm">Confirm</button>
+            <button className="convertButtons" id="convert">Convert</button>
+            <button className="convertButtons" id="confirm">Confirm</button>
         </div>
     );
 }

@@ -60,7 +60,7 @@
     border: none;
 }
 
-#convertButtons {
+.convertButtons {
     color: #FFFFFF;
     font-size: 1rem;
     padding: 10px;
@@ -110,18 +110,18 @@
     padding: 10px;
 }
 
-.fromCurrency {
+#fromCurrency {
     font-size: 24px;
 }
-.toCurrency {
+#toCurrency {
     font-size: 60px;
     color: #DFA616;
 }
 
-.convert {
+#convert {
     background-color: #355DD4;
 }
-.confirm {
+#confirm {
     background-color: #DFA616;
 }
 
