@@ -4,6 +4,7 @@ import DropdownContent from "./DropdownContent/DropdownContent";
 
 export default function Dropdown({ label, options }){
     const [visible, setVisible] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(label)
 
     function toggleDropdown() {
         setVisible(!visible);
@@ -11,8 +12,8 @@ export default function Dropdown({ label, options }){
 
     return(
         <div>
-            <DropdownButton toggle={toggleDropdown} label={label} visible={visible}/>
-            <DropdownContent options={options} visible={visible}/>
+            <DropdownButton toggle={toggleDropdown} label={selectedOption} visible={visible}/>
+            <DropdownContent options={options} visible={visible} setSelectedOption={setSelectedOption} toggle={toggleDropdown}/>
         </div>
     )
 }
