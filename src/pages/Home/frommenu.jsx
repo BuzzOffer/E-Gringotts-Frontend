@@ -4,9 +4,9 @@ function FromMenu() {
             <label for="fromCurrency" className="converterLabel">From</label>
             <br></br>
             <select name="fromCurrency" className="currencyDropDown" id="fromCurrency">
-                <option value="galleon">Galleon</option>
-                <option value="sickle">Sickle</option>
-                <option value="knut">Knut</option>
+                <option value="Galleon">Galleon</option>
+                <option value="Sickle">Sickle</option>
+                <option value="Knut">Knut</option>
             </select>
         </div>
     );
