@@ -3,6 +3,7 @@ import styles from "./Transaction.module.css";
 import TransactionList from "./TransactionList/TransactionList";
 
 const lastNDays = [30, 15, 10];
+const categories = ["Entertainment", "Food", "Misc"]
 
 export default function Transaction(){
     return (

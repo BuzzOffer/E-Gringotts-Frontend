@@ -4,6 +4,8 @@ import PaginationButton from "./PaginationButton";
 
 const BASE_URL = 'http://localhost:8080/api/v1';
 
+const id = 2;
+
 export default function TransactionList(){
     const [error, setError] = useState();
     const [transactions, setTransactions] = useState([]);
@@ -13,7 +15,7 @@ export default function TransactionList(){
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/transaction/all`);
+                const response = await fetch(`${BASE_URL}/transaction/all?id=${id}`);
                 const transactions = await response.json();
                 setTransactions(transactions);
             } catch (e) {
@@ -53,15 +55,21 @@ export default function TransactionList(){
                 </thead>
 
                 <tbody>
-                    {currentLists.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.destinationAccount.myUser.name}</td>
-                            <td>{item.category}</td>
-                            <td>{item.amount}</td>
-                            <td>13 April 2024</td>
-                        </tr>
-                    ))}
+                    {currentLists.map((item) => {
+                        const isReceive = item.destination_account_id_long === id;
+                        const type = isReceive ? "Receive" : "Sent";
+                        const amountClass = isReceive ? styles.receive : styles.sent;
+
+                        return (
+                            <tr key={item.id}>
+                                <td>{type}</td>
+                                <td>{item.destinationAccount.myUser.name}</td>
+                                <td>{item.category}</td>
+                                <td className={amountClass}>{item.amount}</td>
+                                <td>{item.dateTime || "-"}</td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
 
