@@ -28,3 +28,34 @@ td:last-child {
     border-bottom-right-radius: 15px; 
     border-top-right-radius: 15px; 
 }
+
+.paginationContainer{
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.paginationContainer button{
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.paginationContainer .navigationBtn{
+    background-color: var(--primary-clr);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginationContainer .disabledBtn{
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.paginationContainer .active{
+    background-color: #355DD4;
+    color: white;
+}

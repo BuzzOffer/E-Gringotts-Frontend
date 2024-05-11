@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./TransactionList.module.css";
+import PaginationButton from "./PaginationButton";
 
 const BASE_URL = 'http://localhost:8080/api/v1';
 
@@ -27,23 +28,17 @@ export default function TransactionList(){
         return <p>Oops..something went wrong while getting transaction data</p>
     }
 
+    // the component renders again whenever setCurrentPage is called, which means the startIndex and endIndex will change
     const startIndex = (currentPage - 1) * listPerPage;
     const endIndex = startIndex + listPerPage;
     const currentLists = transactions.slice(startIndex, endIndex);
 
-    const handlePrevPage = () => {
-        if(currentPage > 1){
-            setCurrentPage(currentPage - 1);
-        }
-    };
+    const totalPages = Math.ceil(transactions.length / listPerPage);
 
-    const handleNextPage = () => {
-        const totalPages = Math.ceil(transactions.length / listPerPage);
-        if(currentPage < totalPages){
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
+    const handlePageChange = (page) =>{
+        setCurrentPage(page)
+    }
+    
     return (
         <>
             <table>
@@ -70,10 +65,7 @@ export default function TransactionList(){
                 </tbody>
             </table>
 
-            <div>
-                <button onClick={handlePrevPage}>Left</button>
-                <button onClick={handleNextPage}>Right</button>
-            </div>
+            <PaginationButton currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange} />
         </>
     );
 }
