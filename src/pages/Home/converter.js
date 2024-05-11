@@ -43,5 +43,5 @@ export function convert() {
             break;
     }
     fromValue.textContent = `${amount} ${fromCurrency} = `;
-    toValue.textContent = `${convertedAmount} ${toCurrency}`;
+    toValue.textContent = `${convertedAmount.toFixed(2)} ${toCurrency}`;
 }
