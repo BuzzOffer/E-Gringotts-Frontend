@@ -4,12 +4,14 @@
     padding: 0.5rem;
     text-align: center;
     border-radius: 0.5rem;
-    position: relative;
-    opacity: 0;
+    border: 1px solid var(--primary-clr);
+    display: none;
 }
 
 .contentContainerOpen{
-    opacity: 1;
+    display: block;
+    position: absolute;
+    width: 100%;
 }
 
 .option{
