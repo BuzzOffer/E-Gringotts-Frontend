@@ -41,6 +41,7 @@ td:last-child {
     border-radius: 5px;
     width: 2.5rem;
     height: 2.5rem;
+    cursor: pointer;
 }
 
 .paginationContainer .navigationBtn{
@@ -52,7 +53,7 @@ td:last-child {
 
 .paginationContainer .disabledBtn{
     opacity: 0.4;
-    cursor: pointer;
+    cursor: default;
 }
 
 .paginationContainer .active{
