@@ -1,9 +1,15 @@
-let fromCurrency = document.querySelector("#fromCurrency").value;
-let toCurrency = document.querySelector("#toCurrency").value;
-let amount = document.getElementById("amount").value;
-let convertedAmount;
+export let fromCurrency;
+export let toCurrency;
+export let amount;
+export let convertedAmount;
+let fromValue = document.getElementById("fromValue");
+let toValue = document.getElementById("toValue");
 
-function convert() {
+export function convert() {
+    fromCurrency = document.querySelector("#fromCurrency").value;
+    toCurrency = document.querySelector("#toCurrency").value;
+    amount = document.getElementById("amount").value;
+    convertedAmount = amount;
     switch (fromCurrency) {
         case "Galleon":
             switch (toCurrency) {
@@ -36,4 +42,6 @@ function convert() {
             }
             break;
     }
+    fromValue.textContent = {amount} + " " + {fromCurrency} + " = ";
+    toValue.textContent = {convertedAmount} + " " + {toCurrency};
 }
