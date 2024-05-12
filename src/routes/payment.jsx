@@ -1,6 +1,6 @@
 import Payment from '../pages/Payment';
 import PaymentConfirm from "../pages/Payment/PaymentConfirm";
-import PaymentList from "../pages/Payment/PaymentList";
+import PaymentList from "../pages/Payment/PaymentList/PaymentList";
 import PaymentReceipt from "../pages/Payment/PaymentReceipt";
 
 export const PaymentRoute = {
