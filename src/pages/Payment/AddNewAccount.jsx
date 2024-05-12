@@ -20,7 +20,8 @@ function AddAccountScreen() {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container-top">
+            <button className="back-button" onClick={() => window.history.back()}>← Back</button>
             <form onSubmit={handleSubmit}>
                 <FormTitle text="Add New Account" />
                 <TextInput label="Name" type="text" placeholder="Enter the name of the account" name="accountName" value={accountName} onChange={handleChange} />
