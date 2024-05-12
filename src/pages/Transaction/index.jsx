@@ -77,10 +77,6 @@ export default function Transaction(){
         console.log("filter cleared");
         console.log(transactions);
     }
-
-    if(error){
-        return <p>Oops..something went wrong while getting transaction data</p>
-    }
     
     return (
         <>
@@ -91,7 +87,7 @@ export default function Transaction(){
                 <Dropdown label={selectedType} options={types} onOptionClicked={handleTypeChange}/>
             </div>
             <button onClick={clearFilters}>Clear Filter</button>
-            <TransactionList transactions={filteredTransactions} id={id}/>
+            <TransactionList transactions={filteredTransactions} id={id} error={error}/>
         </>
     )
 }

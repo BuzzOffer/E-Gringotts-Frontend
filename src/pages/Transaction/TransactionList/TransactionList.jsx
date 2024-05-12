@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./TransactionList.module.css";
 import PaginationButton from "./PaginationButton";
 
-export default function TransactionList({ transactions, id }){
+export default function TransactionList({ transactions, id, error }){
     const [currentPage, setCurrentPage] = useState(1);
     const listPerPage = 10;
 
@@ -31,21 +31,35 @@ export default function TransactionList({ transactions, id }){
                 </thead>
 
                 <tbody>
-                    {currentLists.map((item) => {
-                        const isReceive = item.destination_account_id_long === id;
-                        const type = isReceive ? "Receive" : "Sent";
-                        const amountClass = isReceive ? styles.receive : styles.sent;
-
-                        return (
-                            <tr key={item.id}>
-                                <td>{type}</td>
-                                <td>{item.destinationAccount.myUser.name}</td>
-                                <td>{item.category}</td>
-                                <td className={amountClass}>{item.amount}</td>
-                                <td>{item.dateTime || "-"}</td>
+                    {error ? (
+                            <tr>
+                                <td colSpan="5">
+                                    Ooops! Something went wrong while fetching your data, please refresh the page.
+                                </td>
                             </tr>
-                        );
-                    })}
+                        ) : currentLists.length > 0 ? (
+                            currentLists.map((item) => {
+                                const isReceive = item.destination_account_id_long === id;
+                                const type = isReceive ? "Receive" : "Sent";
+                                const amountClass = isReceive ? styles.receive : styles.sent;
+
+                                return (
+                                    <tr key={item.id}>
+                                        <td>{type}</td>
+                                        <td>{item.destinationAccount.myUser.name}</td>
+                                        <td>{item.category}</td>
+                                        <td className={amountClass}>{item.amount}</td>
+                                        <td>{item.dateTime || "-"}</td>
+                                    </tr>
+                                );
+                            })
+                        ) : (
+                            <tr>
+                                <td colSpan="5">
+                                    No transaction available
+                                </td>
+                            </tr>
+                        )}
                 </tbody>
             </table>
 
