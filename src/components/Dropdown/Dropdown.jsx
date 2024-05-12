@@ -3,9 +3,14 @@ import DropdownButton from "./DropdownButton/DropdownButton";
 import DropdownContent from "./DropdownContent/DropdownContent";
 import styles from "./Dropdown.module.css";
 
-export default function Dropdown({ label, options }){
+export default function Dropdown({ label, options, onOptionClicked }){
     const [visible, setVisible] = useState(false);
     const [selectedOption, setSelectedOption] = useState(label)
+
+    function handleOptionClick (item) {
+        onOptionClicked(item);
+        toggleDropdown();
+    }
 
     function toggleDropdown() {
         setVisible(!visible);
@@ -13,8 +18,8 @@ export default function Dropdown({ label, options }){
 
     return(
         <div className={styles.dropdownContainer}>
-            <DropdownButton toggle={toggleDropdown} label={selectedOption} visible={visible}/>
-            <DropdownContent options={options} visible={visible} setSelectedOption={setSelectedOption} toggle={toggleDropdown}/>
+            <DropdownButton toggle={toggleDropdown} label={label} visible={visible}/>
+            <DropdownContent options={options} visible={visible} onOptionClicked={handleOptionClick}/>
         </div>
     )
 }
