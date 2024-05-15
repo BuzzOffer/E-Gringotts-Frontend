@@ -1,10 +1,3 @@
-export let fromCurrency;
-export let toCurrency;
-export let amount;
-export let convertedAmount;
-let fromValue = document.getElementById("fromValue");
-let toValue = document.getElementById("toValue");
-
 export function convert(amt, frm, to) {
     let newAmt = amt;
     if (frm === to) {

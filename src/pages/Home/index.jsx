@@ -8,9 +8,29 @@ import CurrencyRate from './currencyrate.jsx';
 import Amount from './amount.jsx';
 import ConvertButtons from './convertbuttons.jsx';
 import './home.css'
+import { convert } from './converter.js';
 
 export default function Home(){
-    const [input, setInput] = useState();
+    const [fromCurrency, setFromCurrency] = useState();
+    const [toCurrency, setToCurrency] = useState();
+    const [inputAmt, setInputAmt] = useState();
+    const [convertedAmt, setConvertedAmt] = useState();
+    const onInputChange = (event) => {
+        //conversion logic
+        let fc = document.querySelector("#fromCurrency").value;
+        let tc = document.querySelector("#toCurrency").value;
+        let amt = event.target.value
+        if (amt > 100000) {
+            return;
+        }
+        let newAmt = convert(amt, fc, tc);
+        setFromCurrency(fc);
+        setToCurrency(tc);
+        setInputAmt(amt);
+        setConvertedAmt(newAmt);
+        //to test
+        console.log(newAmt);
+    }
     return (
         <>
             <h1>Home</h1>
@@ -23,9 +43,9 @@ export default function Home(){
                 <FromMenu />
                 <ToMenu />
                 <div id="merged">
-                    <CurrencyRate />
+                    <CurrencyRate fc={fromCurrency} tc={toCurrency} amt={inputAmt} newAmt={convertedAmt}/>
                 </div>
-                <Amount />
+                <Amount onInput={onInputChange}/>
                 <ConvertButtons />
             </div>
         </>
