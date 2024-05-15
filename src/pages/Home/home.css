@@ -44,7 +44,7 @@
     font-size: 15px;
 }
 
-#sectionMessage {
+.sectionMessage {
     margin: 10px 30px;
     font-weight: lighter;
 }
@@ -90,7 +90,7 @@
     font-size: 2.5rem;
 }
 
-.currencyConverter {
+#currencyConverter {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -101,7 +101,7 @@
     margin: 15px 30px;
 }
 
-.merged {
+#merged {
     grid-area: merged;
     background-color: #172141;
     justify-self: stretch;

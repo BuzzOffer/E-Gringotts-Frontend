@@ -1,4 +1,5 @@
-import Welcome from './welcome.jsx'
+import React, {useEffect, useState} from 'react';
+import Welcome from './welcome.jsx';
 import Balance from './balance.jsx';
 import NavButtons from './navbuttons.jsx';
 import FromMenu from './frommenu.jsx';
@@ -9,18 +10,19 @@ import ConvertButtons from './convertbuttons.jsx';
 import './home.css'
 
 export default function Home(){
+    const [input, setInput] = useState();
     return (
         <>
             <h1>Home</h1>
             <Welcome />
-            <h2 id="sectionMessage">Balance</h2>
+            <h2 className="sectionMessage">Balance</h2>
             <Balance />
             <NavButtons />
-            <h2 id="sectionMessage">Currency Converter</h2>
-            <div className="currencyConverter">
+            <h2 className="sectionMessage">Currency Converter</h2>
+            <div id="currencyConverter">
                 <FromMenu />
                 <ToMenu />
-                <div className="merged">
+                <div id="merged">
                     <CurrencyRate />
                 </div>
                 <Amount />
