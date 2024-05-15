@@ -41,8 +41,6 @@ export default function Home(){
         setToCurrency(tc);
         setInputAmt(amt);
         setConvertedAmt(newAmt);
-        //to test
-        console.log(newAmt);
     }
     return (
         <>
