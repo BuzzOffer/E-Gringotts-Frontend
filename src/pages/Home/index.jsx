@@ -20,7 +20,7 @@ export default function Home(){
         let fc = document.querySelector("#fromCurrency").value;
         let tc = document.querySelector("#toCurrency").value;
         let amt = event.target.value
-        if (amt > 100000) {
+        if (amt > 100000 || amt < 0) {
             return;
         }
         let newAmt = convert(amt, fc, tc);
