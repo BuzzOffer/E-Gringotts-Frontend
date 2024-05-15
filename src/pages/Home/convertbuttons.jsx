@@ -2,10 +2,10 @@ import {convert} from './converter.js';
 import React, {useState} from 'react';
 
 function ConvertButtons() {
-    const [fromValue, setFromValue] = useState();
-    const [toValue, setToValue] = useState();
-    const [fromCurrency, setFromCurrency] = useState();
-    const [toCurrency, setToCurrency] = useState();
+    const [fromValue, setFromValue] = useState(0);
+    const [toValue, setToValue] = useState("");
+    const [fromCurrency, setFromCurrency] = useState("");
+    const [toCurrency, setToCurrency] = useState("");
     
     const setConvert = () => {
         let fc = document.querySelector("#fromCurrency").value;
@@ -20,8 +20,8 @@ function ConvertButtons() {
         setFromCurrency(fc);
         setToCurrency(tc);
 
-        fromRate.textContent = `${fromValue} ${fromCurrency} = `;
-        toRate.textContent = `${toValue} ${toCurrency}`
+        fromRate.textContent = `${Number(fromValue).toFixed(2)} ${fromCurrency} = `;
+        toRate.textContent = `${Number(toValue).toFixed(2)} ${toCurrency}`
     }
     
     return (
