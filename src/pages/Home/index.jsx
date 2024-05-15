@@ -11,10 +11,22 @@ import './home.css'
 import { convert } from './converter.js';
 
 export default function Home(){
-    const [fromCurrency, setFromCurrency] = useState();
-    const [toCurrency, setToCurrency] = useState();
-    const [inputAmt, setInputAmt] = useState();
-    const [convertedAmt, setConvertedAmt] = useState();
+    const [fromCurrency, setFromCurrency] = useState("Sickle");
+    const [toCurrency, setToCurrency] = useState("Knut");
+    const [inputAmt, setInputAmt] = useState(1.00);
+    const [convertedAmt, setConvertedAmt] = useState(29.00);
+    const onOptionSelectFrom = (event) => {
+        let selected = event.target.value;
+        setFromCurrency(selected);
+        let newAmt = convert(inputAmt, selected, toCurrency);
+        setConvertedAmt(newAmt);
+    }
+    const onOptionSelectTo = (event) => {
+        let selected = event.target.value;
+        setToCurrency(selected);
+        let newAmt = convert(inputAmt, fromCurrency, selected);
+        setConvertedAmt(newAmt);
+    }
     const onInputChange = (event) => {
         //conversion logic
         let fc = document.querySelector("#fromCurrency").value;
@@ -41,8 +53,8 @@ export default function Home(){
             <NavButtons />
             <h2 className="sectionMessage">Currency Converter</h2>
             <div id="currencyConverter">
-                <FromMenu />
-                <ToMenu />
+                <FromMenu onOption={onOptionSelectFrom}/>
+                <ToMenu onOption={onOptionSelectTo}/>
                 <div id="merged">
                     <CurrencyRate fc={fromCurrency} tc={toCurrency} amt={inputAmt} newAmt={convertedAmt}/>
                 </div>
