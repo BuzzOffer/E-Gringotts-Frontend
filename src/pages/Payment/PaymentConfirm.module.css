@@ -62,7 +62,7 @@ h2{
     margin-right: 1rem;
 }
 
-button:hover{
+.buttonContainer button:hover{
     filter: brightness(0.7);
     cursor: pointer;
 }
