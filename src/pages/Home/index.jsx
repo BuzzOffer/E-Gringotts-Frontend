@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Welcome from './welcome.jsx';
 import Balance from './balance.jsx';
 import NavButtons from './navbuttons.jsx';
