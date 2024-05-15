@@ -24,7 +24,7 @@
     border-color: #DFA616;
 }
 
-#navbutton {
+.navbutton {
     background-color: #172141;
     color: #FFFFFF;
     border-radius: 10px;
@@ -36,11 +36,11 @@
 
     justify-items: stretch;
 }
-#navbutton svg {
+.navbutton svg {
     fill: #FFFFFF;
     margin: auto;
 }
-#navLabel {
+.navLabel {
     font-size: 15px;
 }
 
