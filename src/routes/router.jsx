@@ -5,6 +5,7 @@ import Transaction from '../pages/Transaction';
 import { PaymentRoute } from "./payment";
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import Statistics from '../pages/Statistics';
 
 export const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
           {
             path: "register",
             element: <Register />,
+          },
+          {
+            path: "statistics",
+            element: <Statistics />,
           },
         ],
       }

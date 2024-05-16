@@ -1,10 +1,12 @@
-function Amount() {
+function Amount({onInput}) {
     return (
         <div>
-            <label for="amount" id="converterLabel">Amount</label>
+            <label for="amount" className="converterLabel">Amount</label>
             <br></br>
-            <input type="number" name="amount" id="currencyDropDown" max="100000" placeholder="Enter Amount">
-                
+            <input type="number" id="amount" name="amount" className="currencyDropDown" 
+            min="0" max="100000" step=".01"
+            placeholder="Enter Amount" onInput={onInput}>
+            
             </input>
         </div>
     );
