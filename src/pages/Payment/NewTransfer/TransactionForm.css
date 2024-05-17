@@ -50,7 +50,9 @@ h1 {
 }
 
 .form-details {
-  margin-bottom: 20px; 
+  width: 80%;
+  margin-bottom: 20px;
+  margin: 10px auto;
 }
 
 .form-details p {
@@ -63,7 +65,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 125%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #dfa616;
@@ -72,14 +74,50 @@ input {
   color: white;
 }
 
+.amount-category {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Add a gap between the fields */
+}
+
+.amount-category .input-container {
+  flex: 1;
+}
+
+.amount-category .input-container_2{
+  flex: 2;
+}
+
 .proceed-button {
   background-color: #dfa616;
   border: none;
   color: #1c2541;
-  padding: 10px 20px;
+  padding: 15 px 30px;
   border-radius: 10px;
   cursor: pointer;
   display: block;
   margin: 20px auto;
-  font-size: 16px;
+  font-size: 18px;
+  width: 80%;
+  text-align: center;
+}
+
+.amount-input {
+  position: relative;
+}
+
+.amount-input input {
+  padding-right: 50px; /* Make space for the currency unit */
+}
+
+.amount-input .currency-unit {
+  position: absolute;
+  top: 70%;
+  font-weight: bold;
+  right: 10px;
+  transform: translateY(-50%);
+  color: var(--dark-yellow);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 18px;
 }

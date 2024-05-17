@@ -54,18 +54,27 @@ const TransactionForm = () => {
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
           />
-          <TextInput
-            label="Amount"
-            placeholder="Enter amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <TextInput
-            label="Category"
-            placeholder="Select category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
+          <div className="amount-category">
+            <div className="input-container_2">
+              <div className="amount-input">
+              <TextInput
+                label="Amount"
+                placeholder="Enter amount"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+              <span className="currency-unit">{currency}</span>
+              </div>
+            </div>
+            <div className="input-container">
+              <TextInput
+                label="Category"
+                placeholder="Select category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+            </div>
+          </div>
           <TextInput
             label="Message"
             placeholder="Enter your message here"
