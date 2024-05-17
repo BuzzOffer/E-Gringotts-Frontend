@@ -3,6 +3,7 @@
 .form-title-center {
     color: var(--white); /* Assuming you've set up your color variables */
     text-align: center;
+    padding-top: 20px; 
     margin-bottom: 20px; /* or any other value based on your design */
     /* Add more styling as needed */
   }
@@ -10,6 +11,7 @@
   .form-title-left {
     color: var(--white); /* Assuming you've set up your color variables */
     text-align: left;
+    padding-top: 20px; 
     margin-bottom: 20px; /* or any other value based on your design */
     /* Add more styling as needed */
   }
@@ -17,6 +19,7 @@
   .form-title-right {
     color: var(--white); /* Assuming you've set up your color variables */
     text-align: right;
+    padding-top: 20px; 
     margin-bottom: 20px; /* or any other value based on your design */
     /* Add more styling as needed */
   }
