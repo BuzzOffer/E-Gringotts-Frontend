@@ -22,7 +22,7 @@ const TransactionForm = () => {
       <FormTitle text="Payment" align='left'/>
 
       <PaymentContainer>
-      <h3>Select your preferred currency:</h3>
+        <h3>Select your preferred currency:</h3>
         <div className="currency-selection">
           <button
             className={`currency-button ${currency === 'Galleon' ? 'selected' : ''}`}
@@ -46,40 +46,52 @@ const TransactionForm = () => {
       </PaymentContainer>
 
       <PaymentContainer>
-      <h3>Enter the following details:</h3>
+        <h3>Enter the following details:</h3>
         <div className="form-details">
           <TextInput
             label="Account Number"
+            type="text"
             placeholder="Enter your account number here"
+            name="accountNumber"
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
+            className="text-input_2"
           />
           <div className="amount-category">
             <div className="input-container_2">
               <div className="amount-input">
-              <TextInput
-                label="Amount"
-                placeholder="Enter amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-              <span className="currency-unit">{currency}</span>
+                <TextInput
+                  label="Amount"
+                  type="text"
+                  placeholder="Enter amount"
+                  name="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  className="text-input_2"
+                />
+                <span className="currency-unit">{currency}</span>
               </div>
             </div>
             <div className="input-container">
               <TextInput
                 label="Category"
+                type="text"
                 placeholder="Select category"
+                name="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                className="text-input_2"
               />
             </div>
           </div>
           <TextInput
             label="Message"
+            type="text"
             placeholder="Enter your message here"
+            name="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            className="text-input_2"
           />
         </div>
         <SubmitButton text="Proceed" />
