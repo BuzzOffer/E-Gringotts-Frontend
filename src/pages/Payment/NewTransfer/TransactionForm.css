@@ -1,0 +1,85 @@
+.payment-form {
+  background-color: #0b132b;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.back-button {
+  background: none;
+  border: 1px solid #dfa616;
+  border-radius: 20px;
+  color: #dfa616;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.currency-selection {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.currency-button {
+  background-color: #1c2541;
+  border: 1px solid #dfa616;
+  color: #dfa616;
+  padding: 20px; /* Increase padding for larger buttons */
+  margin: 0 15px; /* Increase margin for spacing */
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px; /* Increase font size */
+  flex: 1;
+}
+
+.currency-button.selected {
+  background-color: #dfa616;
+  color: #1c2541;
+}
+
+.form-details {
+  margin-bottom: 20px; 
+}
+
+.form-details p {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #dfa616;
+  border-radius: 5px;
+  background-color: #1c2541;
+  color: white;
+}
+
+.proceed-button {
+  background-color: #dfa616;
+  border: none;
+  color: #1c2541;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  font-size: 16px;
+}
