@@ -81,8 +81,8 @@ const TransactionForm = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-        <SubmitButton text="Proceed" position="full" /> {/* Use position prop */}
         </div>
+        <SubmitButton text="Proceed" />
       </PaymentContainer>
     </div>
   );
