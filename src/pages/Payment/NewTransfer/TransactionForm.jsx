@@ -93,8 +93,8 @@ const TransactionForm = () => {
             onChange={(e) => setMessage(e.target.value)}
             className="text-input_2"
           />
+        <SubmitButton text="Proceed" position="right" />
         </div>
-        <SubmitButton text="Proceed" />
       </PaymentContainer>
     </div>
   );
