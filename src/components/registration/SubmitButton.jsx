@@ -1,10 +1,9 @@
-// SubmitButton.js
 import React from 'react';
 import './SubmitButton.css'; // Make sure to import the CSS
 
-function SubmitButton({ text, onClick }) {
+function SubmitButton({ text, onClick, position = 'full' }) {
   return (
-    <button className="submit-button" onClick={onClick}>
+    <button className={`submit-button ${position}`} onClick={onClick}>
       {text}
     </button>
   );
