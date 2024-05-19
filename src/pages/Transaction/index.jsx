@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import styles from "./Transaction.module.css";
 import TransactionList from "./TransactionList/TransactionList";
+import { ApiDateFormat } from "../../utils/DateFormatting";
 
-const lastNDays = [30, 15, 10];
+const lastNDays = [15, 10, 5];
 const categories = ["Entertainment", "Food", "Misc.", "Game"]
 const types = ["Sent", "Receive", "Convert"];
 const BASE_URL = 'http://localhost:8080/api/v1';
@@ -11,7 +12,7 @@ const id = 2;
 
 export default function Transaction(){
 
-    const [selectedDays, setSelectedDays] = useState("Last 30 days");
+    const [selectedDays, setSelectedDays] = useState(lastNDays[0]);
     const [selectedCateory, setSelectedCategory] = useState("Category");
     const [selectedType, setSelectedType] = useState("Type");
     const [error, setError] = useState();
@@ -21,31 +22,39 @@ export default function Transaction(){
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/transaction/all?id=${id}`);
-                const transactions = await response.json();
-                setTransactions(transactions);
-                setFilteredTransactions(transactions);
+                // const response = await fetch(`${BASE_URL}/transaction/all?id=${id}`);
+                const today = new Date();
+                const start = new Date();
+                start.setDate(start.getDate() - selectedDays);
+                const response = await fetch(`${BASE_URL}/transaction/getTransactionByDateTime?start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
+                const data = await response.json();
+                data.reverse();
+                setTransactions(data);
+                setFilteredTransactions(data);
             } catch (e) {
                 setError(e);
             } 
         };
 
         fetchTransactions();
-    }, []);
+    }, [selectedDays]);
 
-    const handleDaysChange = (item) =>{
-        setSelectedDays(`Last ${item} days`);
+    const handleDaysChange = (days) =>{
+        setSelectedDays(days);
     };
 
-    const handleCateogoryChange = async (item) => {
-        try {
-            const response = await fetch(`${BASE_URL}/transaction/getTransaction?id=${id}&property=category&value=${item}`);
-            const transactions = await response.json();
-            setFilteredTransactions(transactions);
-        } catch (error) {
-            setError(error);
-        }
-        setSelectedCategory(item);
+    const handleCateogoryChange = async (category) => {
+        // try {
+        //     const response = await fetch(`${BASE_URL}/transaction/getTransaction?id=${id}&property=category&value=${item}`);
+        //     const transactions = await response.json();
+        //     setFilteredTransactions(transactions);
+        // } catch (error) {
+        //     setError(error);
+        // }
+        // setSelectedCategory(item);
+
+        const transactionByCategory = transactions.filter(transaction => transaction.category === category);
+        setFilteredTransactions(transactionByCategory);
     };
 
     const handleTypeChange = (item) => {
@@ -70,7 +79,7 @@ export default function Transaction(){
     }
 
     const clearFilters = () => {
-        setSelectedDays("Last 30 days");
+        setSelectedDays(lastNDays[0]);
         setSelectedCategory("Category");
         setSelectedType("Type");
         setFilteredTransactions(transactions);
@@ -82,7 +91,7 @@ export default function Transaction(){
         <>
             <h1>Transaction</h1>
             <div className={styles.filterContainer}>
-                <Dropdown label={selectedDays} options={lastNDays} onOptionClicked={handleDaysChange}/>
+                <Dropdown label={`Last ${selectedDays} days`} options={lastNDays} onOptionClicked={handleDaysChange}/>
                 <Dropdown label={selectedCateory} options={categories} onOptionClicked={handleCateogoryChange}/>
                 <Dropdown label={selectedType} options={types} onOptionClicked={handleTypeChange}/>
             </div>
