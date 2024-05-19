@@ -6,10 +6,14 @@ export default function Statistics() {
             <h1>Statistics</h1>
             <div id="visuals">
                 <div id="lineGraph">
-                    <Line></Line>
+                    <button>Yo</button>
                 </div>
-                <div id="pieChart"></div>
-                <div id="barChart"></div>
+                <div id="pieChart">
+                    <button>Yo</button>
+                </div>
+                <div id="barChart">
+                    <button>Yo</button>
+                </div>
             </div>
         </>
     );

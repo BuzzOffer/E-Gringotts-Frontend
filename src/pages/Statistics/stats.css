@@ -1,0 +1,23 @@
+#visuals {
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 1.5rem; 
+    grid-template-areas: 
+    "lineGraph lineGraph"
+    "pieChart barChart";
+    margin: 15px, 30px;
+}
+
+#lineGraph { 
+    grid-area: lineGraph; 
+}
+
+#pieChart { 
+    grid-area: pieChart; 
+}
+
+#barChart { 
+    grid-area: barChart; 
+}
