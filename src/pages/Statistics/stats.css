@@ -11,12 +11,15 @@
 
 .lineGraph { 
     grid-area: lineGraph;
+    background-color: #172141;
 }
 
 .pieChart { 
     grid-area: pieChart; 
+    background-color: #172141;
 }
 
 .barChart { 
     grid-area: barChart; 
+    background-color: #172141;
 }

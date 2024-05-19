@@ -16,8 +16,11 @@ export default function Statistics() {
                                 {
                                     label: "Galleon",
                                     data: expensesData.map((data) => data.value),
+                                    backgroundColor: "#DFA616",
+                                    borderColor: "#DFA616",
                                 },
-                            ]
+                            ],
+                            
                         }}
                     />
                 </div>
@@ -29,6 +32,12 @@ export default function Statistics() {
                                 {
                                     label: "Galleon",
                                     data: expensesData.map((data) => data.value),
+                                    backgroundColor: [
+                                    "#7e0af2",
+                                    "#0af2e6",
+                                    "#93db0d",
+                                    "#ff5500"
+                                    ]
                                 },
                             ]
                         }}
@@ -42,6 +51,12 @@ export default function Statistics() {
                                 {
                                     label: "Galleon",
                                     data: expensesData.map((data) => data.value),
+                                    backgroundColor: [
+                                        "#7e0af2",
+                                        "#0af2e6",
+                                        "#93db0d",
+                                        "#ff5500"
+                                        ]
                                 },
                             ]
                         }}
