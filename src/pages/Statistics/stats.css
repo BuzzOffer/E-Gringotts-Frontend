@@ -1,8 +1,7 @@
-#visuals {
+.visuals {
     display: grid; 
-    grid-auto-columns: 1fr; 
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 1fr 1fr; 
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 1.5rem; 
     grid-template-areas: 
     "lineGraph lineGraph"
@@ -10,14 +9,14 @@
     margin: 15px, 30px;
 }
 
-#lineGraph { 
-    grid-area: lineGraph; 
+.lineGraph { 
+    grid-area: lineGraph;
 }
 
-#pieChart { 
+.pieChart { 
     grid-area: pieChart; 
 }
 
-#barChart { 
+.barChart { 
     grid-area: barChart; 
 }

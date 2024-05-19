@@ -1,18 +1,51 @@
+import { Chart as ChartJS } from 'chart.js/auto'
 import { Line, Pie, Bar } from "react-chartjs-2";
+import './stats.css';
+import expensesData from './data/expensesData.json';
 
 export default function Statistics() {
     return (
         <>
             <h1>Statistics</h1>
-            <div id="visuals">
-                <div id="lineGraph">
-                    <button>Yo</button>
+            <div className="visuals">
+                <div className="lineGraph">
+                    <Line 
+                        data={{
+                            labels: expensesData.map((data) => data.label),
+                            datasets: [
+                                {
+                                    label: "Galleon",
+                                    data: expensesData.map((data) => data.value),
+                                },
+                            ]
+                        }}
+                    />
                 </div>
-                <div id="pieChart">
-                    <button>Yo</button>
+                <div className="pieChart">
+                    <Pie 
+                        data={{
+                            labels: expensesData.map((data) => data.label),
+                            datasets: [
+                                {
+                                    label: "Galleon",
+                                    data: expensesData.map((data) => data.value),
+                                },
+                            ]
+                        }}
+                    />
                 </div>
-                <div id="barChart">
-                    <button>Yo</button>
+                <div className="barChart">
+                    <Bar 
+                        data={{
+                            labels: expensesData.map((data) => data.label),
+                            datasets: [
+                                {
+                                    label: "Galleon",
+                                    data: expensesData.map((data) => data.value),
+                                },
+                            ]
+                        }}
+                    />
                 </div>
             </div>
         </>
