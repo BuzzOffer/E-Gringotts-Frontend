@@ -3,11 +3,13 @@ import { Line, Pie, Bar } from "react-chartjs-2";
 import './stats.css';
 import expensesData from './data/expensesData.json';
 import GraphSelect from './graphselect';
+import BackButton from './backbutton';
 
 export default function Statistics() {
     return (
         <>
             <h1>Statistics</h1>
+            <BackButton />
             <GraphSelect />
             <div className="visuals">
                 <div className="pieChart">
