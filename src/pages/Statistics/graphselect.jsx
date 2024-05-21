@@ -1,11 +1,11 @@
 
-function GraphSelect() {
+function GraphSelect({onOption}) {
     return (
         <div>
-            <select name="time" className="dropDown">
-                <option value="Daily">Daily</option>
-                <option value="Monthly">Monthly</option>
-                <option value="All Time">All Time</option>
+            <select name="time" className="dropDown" onChange={onOption}>
+                <option value="daily">Daily</option>
+                <option value="monthly">Monthly</option>
+                <option value="allTime">All Time</option>
             </select>
         </div>
     )
