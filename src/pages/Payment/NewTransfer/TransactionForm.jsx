@@ -6,12 +6,15 @@ import SubmitButton from '../../../components/registration/SubmitButton';
 import PaymentContainer from './PaymentContainer';
 import '../../../components/registration/Form.css';
 import './TransactionForm.css'; // Make sure to import the CSS
+import Dropdown from '../../../components/Dropdown/Dropdown';
+
+const categories = ["Entertainment", "Food", "Misc.", "Game"];
 
 const TransactionForm = () => {
   const [currency, setCurrency] = useState('Sickle');
   const [accountNumber, setAccountNumber] = useState('');
   const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Select category');
   const [message, setMessage] = useState('');
   const { state: { account } } = useLocation();
 
@@ -22,6 +25,10 @@ const TransactionForm = () => {
       setAccountNumber(account);
     }
   }, [account]);  
+
+  const onOptionClicked = (category) => {
+    setCategory(category);
+  }
   
   return (
     <div>
@@ -79,7 +86,7 @@ const TransactionForm = () => {
                 <span className="currency-unit">{currency}</span>
               </div>
             </div>
-            <div className="input-container">
+            {/* <div className="input-container">
               <TextInput
                 label="Category"
                 type="text"
@@ -89,6 +96,9 @@ const TransactionForm = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 className="text-input_2"
               />
+            </div> */}
+            <div className="dropdownContainer">
+              <Dropdown label={category} options={categories} onOptionClicked={onOptionClicked}/>
             </div>
           </div>
           <TextInput
