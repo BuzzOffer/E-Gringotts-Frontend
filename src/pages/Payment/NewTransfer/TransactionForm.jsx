@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FormTitle from '../../../components/registration/FormTitle';
 import TextInput from '../../../components/registration/TextInput';
 import SubmitButton from '../../../components/registration/SubmitButton';
@@ -13,9 +13,16 @@ const TransactionForm = () => {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [message, setMessage] = useState('');
+  const { state: { account } } = useLocation();
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (account !== undefined) {
+      setAccountNumber(account);
+    }
+  }, [account]);  
+  
   return (
     <div>
       <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
