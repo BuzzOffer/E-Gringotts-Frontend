@@ -26,7 +26,7 @@ export default function Transaction(){
                 const today = new Date();
                 const start = new Date();
                 start.setDate(start.getDate() - selectedDays);
-                const response = await fetch(`${BASE_URL}/transaction/getTransactionByDateTime?start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
+                const response = await fetch(`${BASE_URL}/transaction/getTransactionByDateTime?id=${id}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
                 const data = await response.json();
                 data.reverse();
                 setTransactions(data);
