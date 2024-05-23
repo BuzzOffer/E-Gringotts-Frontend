@@ -14,10 +14,24 @@ export default function PaymentList() {
 
   const [favourites, setFavourites] = useState([]);
   const [error, setError] = useState();
+  const [selectedAccount, setSelectedAccount] = useState();
 
-  const handleNewTransferClick = () => {
-    navigate('/payment/new-transfer',);
+  const toPaymentDetails = (selectedAccount) => {
+    navigate(
+      '/payment/new-transfer', 
+      { state: { account: selectedAccount } }
+    );
   };
+
+  const onRecipientClicked = (accNum) => {
+    setSelectedAccount(accNum);
+  }
+
+  useEffect(() => {
+    if(selectedAccount){
+      toPaymentDetails(selectedAccount);
+    }
+  }, [selectedAccount])
   
   useEffect(() => {
     const fetchFavourites = async () => {
@@ -39,10 +53,10 @@ export default function PaymentList() {
       <div className={styles.paymentContainer}>
         <SearchBar />
         <AddAccount />
-        <AccountList data={favourites} />
+        <AccountList data={favourites} onRecipientClicked={onRecipientClicked}/>
       </div>
       <div className={styles.transferBtnContainer}>
-        <button className={styles.transferBtn} onClick={handleNewTransferClick}>
+        <button className={styles.transferBtn} onClick={() => toPaymentDetails(selectedAccount)}>
           New Transfer
         </button>
       </div>

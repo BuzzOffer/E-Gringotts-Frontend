@@ -1,6 +1,6 @@
 import styles from "./AccountList.module.css";
 
-export default function AccountList({ data }) {
+export default function AccountList({ data, onRecipientClicked }) {
     return (
         <table>
             <thead>
@@ -12,18 +12,17 @@ export default function AccountList({ data }) {
             </thead>
 
             <tbody>
-                {data.map(({id, account}) => {
+                {data.map(({account}) => {
                     
-                    const { accId } = id;
                     const { myUser: { name, phoneNumber, id: accNum } } = account;
                     
                     return (
-                        <tr key={accId}>
+                        <tr key={accNum}>
                             <td>{name}</td>
                             <td>{phoneNumber}</td>
                             <td>{accNum}</td>
                             <td>
-                                <button className={styles.transferBtn}>Transfer</button>
+                                <button className={styles.transferBtn} onClick={() => onRecipientClicked(accNum)}>Transfer</button>
                             </td>
                         </tr>
                     );
