@@ -10,12 +10,17 @@ import Dropdown from '../../../components/Dropdown/Dropdown';
 
 const categories = ["Entertainment", "Food", "Misc.", "Game"];
 
+const ErrorMessage = ({ error }) => {
+  return <p className="error">{error}</p>
+}
+
 const TransactionForm = () => {
   const [currency, setCurrency] = useState('Sickle');
   const [accountNumber, setAccountNumber] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('Select category');
   const [message, setMessage] = useState('');
+  const [inputErrors, setInputErrors] = useState({});
   const { state: { account } } = useLocation();
 
   const navigate = useNavigate();
@@ -28,6 +33,48 @@ const TransactionForm = () => {
 
   const onOptionClicked = (category) => {
     setCategory(category);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = {};
+
+    if(!accountNumber) {
+      errors.accountNumber = "Account number is required";
+    }
+
+    if(!amount) {
+      errors.amount = "Amount is required";
+    }
+
+    if(category === "Select category") {
+      errors.category = "Category not selected";
+    }
+
+    if(!message.trim()) {
+      errors.message = "Please enter a message";
+    }
+
+    setInputErrors(errors);
+
+    if(Object.keys(errors).length > 0){
+      return;
+    }
+
+    navigate(
+      "/payment/confirmation",
+      {
+        state: {
+          transaction: {
+            accountNumber: accountNumber,
+            amount: amount,
+            currency: currency,
+            category: category,
+            message: message
+          }
+        }
+      }
+    )
   }
   
   return (
@@ -61,7 +108,7 @@ const TransactionForm = () => {
 
       <PaymentContainer>
         <h3>Enter the following details:</h3>
-        <div className="form-details">
+        <form className="form-details" onSubmit={handleSubmit}>
           <TextInput
             label="Account Number"
             type="text"
@@ -71,6 +118,7 @@ const TransactionForm = () => {
             onChange={(e) => setAccountNumber(e.target.value)}
             className="text-input_2"
           />
+          {inputErrors.accountNumber && <ErrorMessage error={inputErrors.accountNumber}/>}
           <div className="amount-category">
             <div className="input-container_2">
               <div className="amount-input">
@@ -85,6 +133,7 @@ const TransactionForm = () => {
                 />
                 <span className="currency-unit">{currency}</span>
               </div>
+              {inputErrors.amount && <ErrorMessage error={inputErrors.amount}/>}
             </div>
             {/* <div className="input-container">
               <TextInput
@@ -99,6 +148,7 @@ const TransactionForm = () => {
             </div> */}
             <div className="dropdownContainer">
               <Dropdown label={category} options={categories} onOptionClicked={onOptionClicked}/>
+              {inputErrors.category && <ErrorMessage error={inputErrors.category}/>}
             </div>
           </div>
           <TextInput
@@ -110,8 +160,9 @@ const TransactionForm = () => {
             onChange={(e) => setMessage(e.target.value)}
             className="text-input_2"
           />
-        <SubmitButton text="Proceed" position="right" />
-        </div>
+          {inputErrors.message && <ErrorMessage error={inputErrors.message}/>}
+          <SubmitButton text="Proceed" position="right" type="submit"/>
+        </form>
       </PaymentContainer>
     </div>
   );

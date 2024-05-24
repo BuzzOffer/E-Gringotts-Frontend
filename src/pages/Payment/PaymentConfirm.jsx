@@ -1,11 +1,14 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './PaymentConfirm.module.css'
 
 export default function PaymentConfirm(){
     const navigate = useNavigate();
+    const { state } = useLocation();
      function onConfirmClick(){
         navigate("/payment/confirmation/receipt")
     }
+
+    console.log(state);
 
     return (
         <>

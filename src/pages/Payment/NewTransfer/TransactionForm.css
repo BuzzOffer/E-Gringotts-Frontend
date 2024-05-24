@@ -128,3 +128,7 @@ input {
 .dropdownContainer{
   margin-top: 1rem;
 }
+
+.error {
+  color: #B90202;
+}
