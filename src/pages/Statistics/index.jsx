@@ -1,10 +1,13 @@
-import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart as ChartJS, defaults} from 'chart.js/auto'
 import { Line, Pie, Bar } from "react-chartjs-2";
 import { useState } from 'react';
 import './stats.css';
 import expensesData from './data/expensesData.json';
 import GraphSelect from './graphselect';
 import BackButton from './backbutton';
+
+defaults.maintainAspectRatio = false;
+defaults.responsive = true;
 
 export default function Statistics() {
 

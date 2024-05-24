@@ -6,7 +6,7 @@
     grid-template-areas: 
     "lineGraph lineGraph"
     "pieChart barChart";
-    margin: 15px, 30px;
+    margin: 5px, 15px;
 }
 
 .lineGraph { 
@@ -17,11 +17,17 @@
 .pieChart { 
     grid-area: pieChart; 
     background-color: #172141;
+    height: 400px;
+    border-radius: 20px;
+    margin: 10px;
 }
 
 .barChart { 
     grid-area: barChart; 
     background-color: #172141;
+    height: 400px;
+    border-radius: 20px;
+    margin: 10px;
 }
 
 .dropDown {
