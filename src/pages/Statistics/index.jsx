@@ -60,16 +60,24 @@ export default function Statistics() {
     // const updateGraph = (event) => {
     //     setChartData(event.target.value);
     // }
-
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate()
+    const date = `${today.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${day < 10 ? `0${day}` : `${day}`}` 
     const [chartData, setChartData] = useState(daily);
+    const [startDate, setStartDate] = useState(`${date} 00:00:00`);
+    const [endDate, setEndDate] = useState(`${date} 23:59:59`);
+    
     useEffect(() => {
         const fetchData = async () => {
-            fetch(`http://localhost:8080/api/v1/transaction/getTransaction?property=source_account&value=23`)
+            fetch(`http://localhost:8080/api/v1/transaction/getTransactionByDateTime?start=${startDate}&end=${endDate}`)
             .then(res => {
                 return res.json();
             })
             .then(data => {
                 console.log(data);
+                console.log(startDate);
+                console.log(endDate);
                 setChartData({
                     labels: data.map((item) => item.category),
                     datasets: [
@@ -89,7 +97,7 @@ export default function Statistics() {
             
         }
         fetchData();
-    })
+    }, [])
 
     return (
         <>
