@@ -26,36 +26,6 @@ export default function Statistics() {
             },
         ]
     }
-    // const monthly = {
-    //     labels: expensesData.map((data) => data.label),
-    //     datasets: [
-    //         {
-    //             label: "Sickle",
-    //             data: expensesData.map((data) => data.value),
-    //             backgroundColor: [
-    //             "#7e0af2",
-    //             "#0af2e6",
-    //             "#93db0d",
-    //             "#ff5500"
-    //             ]
-    //         },
-    //     ]
-    // }
-    // const allTime = {
-    //     labels: expensesData.map((data) => data.label),
-    //     datasets: [
-    //         {
-    //             label: "Knut",
-    //             data: expensesData.map((data) => data.value),
-    //             backgroundColor: [
-    //             "#7e0af2",
-    //             "#0af2e6",
-    //             "#93db0d",
-    //             "#ff5500"
-    //             ]
-    //         },
-    //     ]
-    // }
     
     // const updateGraph = (event) => {
     //     setChartData(event.target.value);
@@ -66,15 +36,6 @@ export default function Statistics() {
     const day = today.getDate()
     const yearMonth = `${year}-${month < 10 ? `0${month}` : `${month}`}`
     const date = `${yearMonth}-${day < 10 ? `0${day}` : `${day}`}`
-
-  
-    const [chartData, setChartData] = useState(daily);
-    const [startDate, setStartDate] = useState(`${date} 00:00:00`);
-    const [endDate, setEndDate] = useState(`${date} 23:59:59`);
-    const getWithinPeriod = `getTransactionByDateTime?start=${startDate}&end=${endDate}` //will change to get by acc id and by datetime
-    const getAll = `all` //will change to get by acc id
-    const [condition, setCondition] = useState(getWithinPeriod)
-
     var lastDayOfMonth;
     if (month === 2) {
         if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
@@ -90,9 +51,15 @@ export default function Statistics() {
     else {
         lastDayOfMonth = 31;
     }
+  
+    const [chartData, setChartData] = useState(daily);
+    const [startDate, setStartDate] = useState(`${date} 00:00:00`);
+    const [endDate, setEndDate] = useState(`${date} 23:59:59`);
+    const getDaily = `getTransactionByDateTime?start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
+    const getMonthly = `getTransactionByDateTime?start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
+    const getAll = `all` //will change to get by acc id
+    const [condition, setCondition] = useState(getDaily)
 
-
-    
     useEffect(() => {
         const fetchData = async () => {
             fetch(`http://localhost:8080/api/v1/transaction/${condition}`)
@@ -122,20 +89,16 @@ export default function Statistics() {
             
         }
         fetchData();
-    }, [])
+    }, [condition])
 
     const onSelect = (event) => {
         switch(event.target.value) {
             case 'daily':
-                setStartDate(`${date} 00:00:00`);
-                setEndDate(`${date} 23:59:59`);
-                setCondition(getWithinPeriod);
+                setCondition(getDaily);
                 console.log("Daily!")
                 break;
             case 'monthly':
-                setStartDate(`${yearMonth}-01 00:00:00`);
-                setEndDate(`${yearMonth}-${lastDayOfMonth} 23:59:59`);
-                setCondition(getWithinPeriod);
+                setCondition(getMonthly);
                 console.log("Monthly!")
                 break;
             case 'allTime':
