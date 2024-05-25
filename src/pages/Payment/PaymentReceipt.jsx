@@ -1,4 +1,6 @@
+import { useLocation } from "react-router-dom";
 import styles from "./PaymentReceipt.module.css";
+import { useEffect } from "react";
 
 const transactionDetails = [
     {
@@ -35,6 +37,9 @@ const TickIcon = ({ color }) => (
 )
 
 export default function PaymentReceipt(){
+
+    const { state: { date, userId } } = useLocation();
+
     return(
         <>
             <div className={styles.receiptContainer}>

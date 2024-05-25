@@ -7,7 +7,6 @@ import { ApiDateFormat } from "../../utils/DateFormatting";
 const lastNDays = [15, 10, 5];
 const categories = ["Entertainment", "Food", "Misc.", "Game"]
 const types = ["Sent", "Receive", "Convert"];
-const BASE_URL = 'http://localhost:8080/api/v1';
 const id = 2;
 
 export default function Transaction(){
@@ -26,7 +25,7 @@ export default function Transaction(){
                 const today = new Date();
                 const start = new Date();
                 start.setDate(start.getDate() - selectedDays);
-                const response = await fetch(`${BASE_URL}/transaction/getTransactionByDateTime?id=${id}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getTransactionByDateTime?id=${id}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
                 const data = await response.json();
                 data.reverse();
                 setTransactions(data);

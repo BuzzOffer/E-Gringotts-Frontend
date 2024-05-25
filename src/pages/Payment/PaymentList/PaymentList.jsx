@@ -19,7 +19,7 @@ export default function PaymentList() {
   const toPaymentDetails = (selectedAccount) => {
     navigate(
       '/payment/new-transfer', 
-      { state: { account: selectedAccount } }
+      { state: { account: selectedAccount, userId: id } }
     );
   };
 

@@ -21,7 +21,7 @@ const TransactionForm = () => {
   const [category, setCategory] = useState('Select category');
   const [message, setMessage] = useState('');
   const [inputErrors, setInputErrors] = useState({});
-  const { state: { account } } = useLocation();
+  const { state: { account, userId } } = useLocation();
 
   const navigate = useNavigate();
 
@@ -65,6 +65,7 @@ const TransactionForm = () => {
       "/payment/confirmation",
       {
         state: {
+          userId: userId,
           transaction: {
             accountNumber: accountNumber,
             amount: amount,
