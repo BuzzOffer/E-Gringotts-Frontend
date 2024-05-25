@@ -61,16 +61,41 @@ export default function Statistics() {
     //     setChartData(event.target.value);
     // }
     const today = new Date();
+    const year = today.getFullYear();
     const month = today.getMonth() + 1;
     const day = today.getDate()
-    const date = `${today.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${day < 10 ? `0${day}` : `${day}`}` 
+    const yearMonth = `${year}-${month < 10 ? `0${month}` : `${month}`}`
+    const date = `${yearMonth}-${day < 10 ? `0${day}` : `${day}`}`
+
+  
     const [chartData, setChartData] = useState(daily);
     const [startDate, setStartDate] = useState(`${date} 00:00:00`);
     const [endDate, setEndDate] = useState(`${date} 23:59:59`);
+    const getWithinPeriod = `getTransactionByDateTime?start=${startDate}&end=${endDate}` //will change to get by acc id and by datetime
+    const getAll = `all` //will change to get by acc id
+    const [condition, setCondition] = useState(getWithinPeriod)
+
+    var lastDayOfMonth;
+    if (month === 2) {
+        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+            lastDayOfMonth == 29;
+        }
+        else {
+            lastDayOfMonth == 28;
+        }
+    }
+    else if (month === 4 || month === 6 || month === 9 || month === 11) {
+        lastDayOfMonth = 30;
+    }
+    else {
+        lastDayOfMonth = 31;
+    }
+
+
     
     useEffect(() => {
         const fetchData = async () => {
-            fetch(`http://localhost:8080/api/v1/transaction/getTransactionByDateTime?start=${startDate}&end=${endDate}`)
+            fetch(`http://localhost:8080/api/v1/transaction/${condition}`)
             .then(res => {
                 return res.json();
             })
@@ -98,6 +123,22 @@ export default function Statistics() {
         }
         fetchData();
     }, [])
+
+    const onSelect = (event) => {
+        switch(event.target.value) {
+            case 'daily':
+                setStartDate(`${date} 00:00:00`);
+                setEndDate(`${date} 23:59:59`);
+                break;
+            case 'monthly':
+                setStartDate(`${yearMonth}-01 00:00:00`);
+                setEndDate(`${yearMonth}-${lastDayOfMonth} 23:59:59`);
+                break;
+            case 'allTime':
+                setCondition(getAll);
+                break;
+        }
+    }
 
     return (
         <>
