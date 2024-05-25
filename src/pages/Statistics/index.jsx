@@ -1,6 +1,6 @@
 import { Chart as ChartJS, defaults} from 'chart.js/auto'
 import { Line, Pie, Bar } from "react-chartjs-2";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './stats.css';
 import expensesData from './data/expensesData.json';
 import GraphSelect from './graphselect';
@@ -74,7 +74,7 @@ export default function Statistics() {
                 </div>
                 <div className="barChart">
                     <Bar 
-                        data={allTime}
+                        data={data}
                     />
                 </div>
             </div>
