@@ -129,13 +129,18 @@ export default function Statistics() {
             case 'daily':
                 setStartDate(`${date} 00:00:00`);
                 setEndDate(`${date} 23:59:59`);
+                setCondition(getWithinPeriod);
+                console.log("Daily!")
                 break;
             case 'monthly':
                 setStartDate(`${yearMonth}-01 00:00:00`);
                 setEndDate(`${yearMonth}-${lastDayOfMonth} 23:59:59`);
+                setCondition(getWithinPeriod);
+                console.log("Monthly!")
                 break;
             case 'allTime':
                 setCondition(getAll);
+                console.log("All time!")
                 break;
         }
     }
@@ -144,7 +149,7 @@ export default function Statistics() {
         <>
             <h1>Statistics</h1>
             <BackButton />
-            <GraphSelect/>
+            <GraphSelect onOption={onSelect}/>
             <div className="visuals">
                 <div className="pieChart">
                     <Pie 
