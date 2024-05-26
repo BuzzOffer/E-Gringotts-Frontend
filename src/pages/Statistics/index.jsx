@@ -72,13 +72,26 @@ export default function Statistics() {
                 console.log(endDate);
 
                 const newData = data.filter((object) => object.source_account_id_long === 24);
+                const categories = [];
+                const amounts = [];
+
+                for (let transactions of newData) {
+                    if (!categories.includes(transactions.category)) {
+                        categories.push(transactions.category);
+                        amounts.push(transactions.amount);
+                    }
+                    else {
+                        var targetIndex = categories.indexOf(transactions.category);
+                        amounts[targetIndex] += transactions.amount;
+                    }
+                }
                 
                 setChartData({
-                    labels: newData.map((item) => item.category),
+                    labels: categories,
                     datasets: [
                         {
                             label: "Funds",
-                            data: newData.map((item) => item.amount),
+                            data: amounts,
                             backgroundColor: [
                                 "#7e0af2",
                                 "#0af2e6",
