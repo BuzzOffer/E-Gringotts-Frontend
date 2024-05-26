@@ -52,7 +52,7 @@ export default function PaymentList() {
       <h1>Payment</h1>
       <div className={styles.paymentContainer}>
         <SearchBar />
-        <AddAccount />
+        <AddAccount userId={id}/>
         <AccountList data={favourites} onRecipientClicked={onRecipientClicked}/>
       </div>
       <div className={styles.transferBtnContainer}>

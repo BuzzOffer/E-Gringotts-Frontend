@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AddAccount.module.css';
 
-export default function AddAccount() {
+export default function AddAccount({ userId }) {
   const navigate = useNavigate();
 
   const handleAddAccountClick = () => {
-    navigate('/payment/add-account');
+    navigate('/payment/add-account', { state: { userId: userId }});
   };
 
   return (
