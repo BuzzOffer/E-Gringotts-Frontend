@@ -70,12 +70,15 @@ export default function Statistics() {
                 console.log(data);
                 console.log(startDate);
                 console.log(endDate);
+
+                const newData = data.filter((object) => object.source_account_id_long === 24);
+                
                 setChartData({
-                    labels: data.map((item) => item.category),
+                    labels: newData.map((item) => item.category),
                     datasets: [
                         {
                             label: "Funds",
-                            data: data.map((item) => item.amount),
+                            data: newData.map((item) => item.amount),
                             backgroundColor: [
                                 "#7e0af2",
                                 "#0af2e6",
