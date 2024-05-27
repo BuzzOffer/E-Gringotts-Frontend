@@ -55,6 +55,7 @@ export default function Statistics() {
     const [chartData, setChartData] = useState(daily);
     const [startDate, setStartDate] = useState(`${date} 00:00:00`);
     const [endDate, setEndDate] = useState(`${date} 23:59:59`);
+    const [timeChartData, setTimeChartData] = useState(daily);
     const getDaily = `getTransactionByDateTime?start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
     const getMonthly = `getTransactionByDateTime?start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
     const getAll = `all` //will change to get by acc id
@@ -74,6 +75,7 @@ export default function Statistics() {
                 const newData = data.filter((object) => object.source_account_id_long === 24);
                 const categories = [];
                 const amounts = [];
+                const timestamps = [];
 
                 for (let transactions of newData) {
                     if (!categories.includes(transactions.category)) {
@@ -84,6 +86,7 @@ export default function Statistics() {
                         var targetIndex = categories.indexOf(transactions.category);
                         amounts[targetIndex] += transactions.amount;
                     }
+                    timestamps.push(transactions.dateTime);
                 }
                 
                 setChartData({
@@ -98,6 +101,17 @@ export default function Statistics() {
                                 "#93db0d",
                                 "#ff5500"
                             ]
+                        }
+                    ]
+                })
+                setTimeChartData({
+                    labels: timestamps,
+                    datasets: [
+                        {
+                            label: "Expenses",
+                            data: newData.map((item) => item.amount),
+                            backgroundColor: "#DFA616",
+                            borderColor: "#DFA616"
                         }
                     ]
                 })
@@ -138,6 +152,11 @@ export default function Statistics() {
                 <div className="barChart">
                     <Bar 
                         data={chartData}
+                    />
+                </div>
+                <div className="lineGraph">
+                    <Line 
+                        data={timeChartData}
                     />
                 </div>
             </div>
