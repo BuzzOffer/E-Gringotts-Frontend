@@ -25,7 +25,7 @@ export default function Statistics() {
                 ]
             },
         ]
-    }
+    } //just a dummy dataset as a default value of the states
     
     // const updateGraph = (event) => {
     //     setChartData(event.target.value);
