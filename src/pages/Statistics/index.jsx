@@ -10,6 +10,7 @@ defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
 export default function Statistics() {
+    const isAdmin = false;
 
     const daily = {
         labels: expensesData.map((data) => data.label),
@@ -76,8 +77,14 @@ export default function Statistics() {
                 // console.log(data);
                 // console.log(startDate);
                 // console.log(endDate);
+                let newData = [];
 
-                const newData = data.filter((object) => object.source_account_id_long === 24);
+                if (!isAdmin) {
+                    newData = data.filter((object) => object.source_account_id_long === 24);
+                }
+                else {
+                    newData = data;
+                }
 
 
                 for (let transactions of newData) {
