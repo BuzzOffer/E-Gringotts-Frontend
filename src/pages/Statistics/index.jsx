@@ -56,10 +56,15 @@ export default function Statistics() {
     const [startDate, setStartDate] = useState(`${date} 00:00:00`);
     const [endDate, setEndDate] = useState(`${date} 23:59:59`);
     const [timeChartData, setTimeChartData] = useState(daily);
+    const [totalExpenses, setTotalExpenses] = useState(0);
     const getDaily = `getTransactionByDateTime?start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
     const getMonthly = `getTransactionByDateTime?start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
     const getAll = `all` //will change to get by acc id
     const [condition, setCondition] = useState(getDaily)
+
+    const categories = [];
+    const amounts = [];
+    const timestamps = [];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,14 +73,12 @@ export default function Statistics() {
                 return res.json();
             })
             .then(data => {
-                console.log(data);
-                console.log(startDate);
-                console.log(endDate);
+                // console.log(data);
+                // console.log(startDate);
+                // console.log(endDate);
 
                 const newData = data.filter((object) => object.source_account_id_long === 24);
-                const categories = [];
-                const amounts = [];
-                const timestamps = [];
+
 
                 for (let transactions of newData) {
                     if (!categories.includes(transactions.category)) {
@@ -88,6 +91,10 @@ export default function Statistics() {
                     }
                     timestamps.push(transactions.dateTime);
                 }
+
+                setTotalExpenses(amounts.reduce((acc, currentVal) => {
+                    return acc + currentVal;
+                }, 0));
                 
                 setChartData({
                     labels: categories,
@@ -160,6 +167,7 @@ export default function Statistics() {
                     />
                 </div>
             </div>
+            <h2 id="totalExpenses">Total expenses: {totalExpenses}</h2>
         </>
     );
 }
