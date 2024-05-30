@@ -18,14 +18,23 @@ const CancelIcon = () => (
     </svg>
 );
 
-export default function SearchBar(){
+
+export default function SearchBar({ handleInputChange, query }){
+
+    const onCancelClick = () => {
+        const e = {
+            target: { value: ""}
+        };
+        handleInputChange(e);
+    }
+
     return (
         <div className={styles.searchContainer}>
             <SearchIcon />
 
-            <input className={styles.searchInput} type="search" placeholder="Search for accounts here" />
+            <input className={styles.searchInput} type="search" value={query} placeholder="Search for accounts here" onChange={handleInputChange}/>
 
-            <button className={styles.cancelBtn}>
+            <button className={styles.cancelBtn} onClick={onCancelClick}>
                 <CancelIcon />
             </button>
         </div>

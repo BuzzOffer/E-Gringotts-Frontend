@@ -13,8 +13,11 @@ export default function PaymentList() {
   const navigate = useNavigate();
 
   const [favourites, setFavourites] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
   const [error, setError] = useState();
   const [selectedAccount, setSelectedAccount] = useState();
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const toPaymentDetails = (selectedAccount) => {
     navigate(
@@ -37,23 +40,40 @@ export default function PaymentList() {
     const fetchFavourites = async () => {
         try {
             const response = await fetch(`${BASE_URL}/favourites/all?id=${id}`);
-            const data = await response.json();
-            setFavourites(data);
+            if(response.ok) {
+              const data = await response.json();
+              setFavourites(data);
+              setFilteredList(data);
+            }
         } catch (e) {
+            console.log(e);
             setError(e);
-        } 
+        } finally {
+            setLoading(false);
+        }
     };
 
     fetchFavourites();
-}, );
+  }, []);
+
+  const handleInputChange = (e) => {
+    const searchTerm = e.target.value;
+    setQuery(searchTerm);
+    const filteredItems = favourites.filter((item) => 
+      item.account.myUser.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredList(filteredItems);
+    
+  }
 
   return (
     <>
       <h1>Payment</h1>
       <div className={styles.paymentContainer}>
-        <SearchBar />
+        <SearchBar handleInputChange={handleInputChange} query={query}/>
         <AddAccount userId={id}/>
-        <AccountList data={favourites} onRecipientClicked={onRecipientClicked}/>
+        <AccountList error={error} loading={loading} data={filteredList} onRecipientClicked={onRecipientClicked}/>
       </div>
       <div className={styles.transferBtnContainer}>
         <button className={styles.transferBtn} onClick={() => toPaymentDetails(selectedAccount)}>

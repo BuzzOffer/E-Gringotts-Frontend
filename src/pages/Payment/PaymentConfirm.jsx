@@ -2,12 +2,14 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './PaymentConfirm.module.css'
 import { useEffect, useState } from 'react';
 import { ApiDateFormat } from '../../utils/DateFormatting';
+import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
 
 export default function PaymentConfirm(){
     const navigate = useNavigate();
     const { state: { transaction, userId } } = useLocation();
     const [destinationAccount, setDestinationAccount] = useState({});
     const [error, setError] = useState();
+    const [loading, setLoading] = useState(false);
     // const [transactionData, setTransactionData] = useState({});
 
     const isPropertyEmpty = (obj) => {
@@ -23,6 +25,7 @@ export default function PaymentConfirm(){
     }
 
     const onConfirmClick = async () => {
+        setLoading(true);
         const today = ApiDateFormat(new Date());
 
         console.log(transaction);
@@ -71,6 +74,8 @@ export default function PaymentConfirm(){
         } catch (error) {
             console.log(error);
             setError(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -149,6 +154,7 @@ export default function PaymentConfirm(){
                         Confirm
                     </button>
                 </section>
+                {loading && <LoadingOverlay />}
             </div>
         </>
     )
