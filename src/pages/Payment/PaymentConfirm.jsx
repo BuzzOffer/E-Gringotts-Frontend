@@ -66,8 +66,7 @@ export default function PaymentConfirm(){
                 navigate("/payment/confirmation/receipt",
                     {
                         state: {
-                            date: today,
-                            userId: userId
+                            accountId: sourceAccount.id
                         }
                     }
                 )

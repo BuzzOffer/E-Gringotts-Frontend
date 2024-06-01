@@ -1,29 +1,6 @@
 import { useLocation } from "react-router-dom";
 import styles from "./PaymentReceipt.module.css";
-import { useEffect } from "react";
-
-const transactionDetails = [
-    {
-        label: "Transasction ID",
-        value: "TRX123456"
-    },
-    {
-        label: "Date & Time",
-        value: "11 April 2024, 3:00 PM"
-    },
-    {
-        label: "From",
-        value: "Wen Yang"
-    },
-    {
-        label: "To",
-        value: "Simon"
-    },
-    {
-        label: "Reference",
-        value: "Something"
-    },
-];
+import { useEffect, useState } from "react";
 
 const TickIcon = ({ color }) => (
     <svg 
@@ -38,7 +15,51 @@ const TickIcon = ({ color }) => (
 
 export default function PaymentReceipt(){
 
-    const { state: { date, userId } } = useLocation();
+    const { state: { accountId } } = useLocation();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+    const [transactionDetails, setTransactionDetails] = useState([]);
+    const [amount, setAmount] = useState();
+
+    useEffect(() => {
+        const fetchReceipt = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getLatestByAccountId?id=${accountId}`);
+                const data = await response.json();
+                setTransactionDetails([
+                    {
+                        label: "Transasction ID",
+                        value: data.id
+                    },
+                    {
+                        label: "Date & Time",
+                        value: data.dateTime
+                    },
+                    {
+                        label: "From",
+                        value: data.sourceAccount.myUser.name
+                    },
+                    {
+                        label: "To",
+                        value: data.destinationAccount.myUser.name
+                    },
+                    {
+                        label: "Reference",
+                        value: data.description
+                    },
+                ]);
+                setAmount(`${data.amount} ${data.destinationCurrency}`);
+            } catch (error) {
+                console.log(error);
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchReceipt();
+    }, [])
 
     return(
         <>
@@ -46,7 +67,7 @@ export default function PaymentReceipt(){
                 <h1>E-Gringotts Receipt</h1>
                 <div className={styles.statusContainer}>
                     <TickIcon color={"#2EAE01"}/>
-                    <p className={styles.amount}>50.00 Knut</p>
+                    <p className={styles.amount}>{amount}</p>
                     <p className={styles.status}>Payment Successfull</p>
                 </div>
 
