@@ -17,22 +17,28 @@ export default function Transaction(){
     const [error, setError] = useState();
     const [transactions, setTransactions] = useState([]);
     const [filteredTransactions, setFilteredTransactions] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchTransactions = async () => {
+            setLoading(true);
             try {
                 // const response = await fetch(`${BASE_URL}/transaction/all?id=${id}`);
                 const today = new Date();
                 const start = new Date();
                 start.setDate(start.getDate() - selectedDays);
+                today.setDate(today.getDate() + 1);
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getTransactionByDateTime?id=${id}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
                 const data = await response.json();
                 data.reverse();
                 setTransactions(data);
                 setFilteredTransactions(data);
             } catch (e) {
+                console.log(e);
                 setError(e);
-            } 
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchTransactions();
@@ -95,7 +101,7 @@ export default function Transaction(){
                 <Dropdown label={selectedType} options={types} onOptionClicked={handleTypeChange}/>
             </div>
             <button onClick={clearFilters}>Clear Filter</button>
-            <TransactionList transactions={filteredTransactions} id={id} error={error}/>
+            <TransactionList transactions={filteredTransactions} id={id} error={error} loading={loading}/>
         </>
     )
 }

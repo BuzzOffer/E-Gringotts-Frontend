@@ -19,6 +19,12 @@ td{
     border: solid 1px var(--background-clr-lighter);
 }
 
+.loadingContainer{
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+}
+
 .receive{
     color: #40B52C;
 }
