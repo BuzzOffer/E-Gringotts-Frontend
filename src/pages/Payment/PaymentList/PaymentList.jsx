@@ -75,11 +75,13 @@ export default function PaymentList() {
         <AddAccount userId={id}/>
         <AccountList error={error} loading={loading} data={filteredList} onRecipientClicked={onRecipientClicked}/>
       </div>
-      <div className={styles.transferBtnContainer}>
-        <button className={styles.transferBtn} onClick={() => toPaymentDetails(selectedAccount)}>
-          New Transfer
-        </button>
-      </div>
+      {!loading && !error && (
+        <div className={styles.transferBtnContainer}>
+          <button className={styles.transferBtn} onClick={() => toPaymentDetails(selectedAccount)}>
+            New Transfer
+          </button>
+        </div>
+      )}
     </>
   );
 }
