@@ -1,6 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./PaymentReceipt.module.css";
 import { useEffect, useState } from "react";
+import Spinner from "../../components/Spinner/Spinner";
 
 const TickIcon = ({ color }) => (
     <svg 
@@ -15,6 +16,7 @@ const TickIcon = ({ color }) => (
 
 export default function PaymentReceipt(){
 
+    const navigate = useNavigate();
     const { state: { accountId } } = useLocation();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
@@ -61,23 +63,35 @@ export default function PaymentReceipt(){
         fetchReceipt();
     }, [])
 
+    const onContinueClicked = () => {
+        navigate("/");
+    }
+
     return(
         <>
             <div className={styles.receiptContainer}>
                 <h1>E-Gringotts Receipt</h1>
-                <div className={styles.statusContainer}>
-                    <TickIcon color={"#2EAE01"}/>
-                    <p className={styles.amount}>{amount}</p>
-                    <p className={styles.status}>Payment Successfull</p>
-                </div>
+                {loading && <div className={styles.loadingContainer}><Spinner /></div>}
 
-                {transactionDetails.map((item) => (
-                    <div className={styles.detailsContainer} key={item.label}>
-                        <p className={styles.label}>{item.label}</p>
-                        <p className={styles.value}>{item.value}</p>
-                    </div>
-                ))}
-                <button className={styles.continueBtn} type="button">Continue</button>
+                {error && <p>Failed to load receipt. Please refresh the page.</p>}
+
+                {!loading && !error && (
+                    <>
+                        <div className={styles.statusContainer}>
+                            <TickIcon color={"#2EAE01"}/>
+                            <p className={styles.amount}>{amount}</p>
+                            <p className={styles.status}>Payment Successfull</p>
+                        </div>
+
+                        {transactionDetails.map((item) => (
+                            <div className={styles.detailsContainer} key={item.label}>
+                                <p className={styles.label}>{item.label}</p>
+                                <p className={styles.value}>{item.value}</p>
+                            </div>
+                        ))}
+                        <button className={styles.continueBtn} type="button" onClick={onContinueClicked}>Continue</button>                    
+                    </>
+                )}
             </div>
         </>
     )
