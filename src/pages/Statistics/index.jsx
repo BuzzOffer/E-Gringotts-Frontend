@@ -163,8 +163,10 @@ export default function Statistics() {
         <>
             <h1>Statistics</h1>
             <BackButton />
-            <GraphSelect onOption={onSelect} />
-            <CurrencySelect onOption={onSelectCurrency} />
+            <div className="dropdownGroup">
+                <GraphSelect onOption={onSelect} />
+                <CurrencySelect onOption={onSelectCurrency} />
+            </div>
             <div className="visuals">
                 <div className="pieChart">
                     <Pie 
