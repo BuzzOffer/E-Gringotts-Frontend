@@ -11,6 +11,7 @@ import './home.css'
 import { convert } from './converter.js';
 import Spinner from '../../components/Spinner/Spinner.jsx';
 import { ApiDateFormat } from '../../utils/DateFormatting.js';
+import Admin from './Admin/index.jsx';
 
 export default function Home({ userId }){
     const [loading, setLoading] = useState(false);
@@ -162,6 +163,8 @@ export default function Home({ userId }){
                     </div>
                 </>
             )}
+
+            <Admin />
         </>
     );
 }

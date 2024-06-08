@@ -1,0 +1,36 @@
+.dashboardContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 2;
+}
+
+.content {
+    background-color: var(--background-clr-lighter);
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 3rem;
+}
+
+.value {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--primary-clr);
+    line-height: 1;
+}
+
+.caption {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.pieChart {
+    grid-column: span 2;
+    height: 30rem;
+}

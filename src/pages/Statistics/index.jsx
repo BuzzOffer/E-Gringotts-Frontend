@@ -82,7 +82,7 @@ export default function Statistics() {
                 let newData = [];
 
                 if (!isAdmin) {
-                    newData = data.filter((object) => object.source_account_id_long === 24);
+                    newData = data.filter((object) => object.source_account_id_long === 2);
                 }
                 else {
                     newData = data;
