@@ -52,7 +52,7 @@ function RegisterScreen() {
     
             if (response.ok) {
                 try {
-                    const data = JSON.parse(text); // Attempt to parse JSON
+                    const data = text.length > 0 ? JSON.parse(text): ""; // Attempt to parse JSON
                     console.log('User registered successfully:', data);
                     alert('User registered successfully');
                     setErrorMessage('');  // Clear error message if successful
