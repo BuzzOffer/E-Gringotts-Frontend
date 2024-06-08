@@ -26,12 +26,12 @@ function RegisterScreen() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (password !== confirmPassword) {
             setErrorMessage('Passwords do not match');
             return;
         }
-
+    
         try {
             const response = await fetch(`http://localhost:8080/api/v1/user/create?type=${userType}`, {
                 method: 'POST',
@@ -45,23 +45,38 @@ function RegisterScreen() {
                     phoneNumber: phoneNumber,
                 }),
             });
-
+    
+            const text = await response.text(); // Read response as text
+    
+            console.log('Server response:', text); // Log the response for debugging
+    
             if (response.ok) {
-                const data = await response.json();
-                console.log('User registered successfully:', data);
-                alert('User registered successfully');
-                setErrorMessage('');  // Clear error message if successful
+                try {
+                    const data = JSON.parse(text); // Attempt to parse JSON
+                    console.log('User registered successfully:', data);
+                    alert('User registered successfully');
+                    setErrorMessage('');  // Clear error message if successful
+                } catch (e) {
+                    console.error('Failed to parse JSON:', e);
+                    setErrorMessage('Unexpected server response');
+                }
             } else {
-                const errorData = await response.json();
-                console.error('Failed to register user:', errorData);
-                setErrorMessage(`Failed to register user: ${errorData.message || 'Unknown error'}`);
+                let errorMessage;
+                try {
+                    const errorData = JSON.parse(text); // Attempt to parse JSON
+                    errorMessage = `Failed to register user: ${errorData.message || 'Unknown error'}`;
+                } catch (e) {
+                    errorMessage = `Failed to register user: ${text}`; // Use text response if JSON parsing fails
+                }
+                console.error(errorMessage);
+                setErrorMessage(errorMessage);
             }
         } catch (error) {
             console.error('Error:', error);
             setErrorMessage(`Error registering user: ${error.message}`);
         }
     };
-
+    
     return (
         <div className="form-container">
             <form onSubmit={handleSubmit}>
