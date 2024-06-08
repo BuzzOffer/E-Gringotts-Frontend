@@ -1,7 +1,7 @@
 import React from 'react';
 import './TextInput.css'; // Importing CSS specific to TextInput
 
-function TextInput({ label, type, placeholder, name, value, onChange, className = 'text-input' }) {
+function TextInput({ label, type, placeholder, name, value, onChange, className = 'text-input', required = true }) {
   return (
     <div className={className}>
       <label className="label">{label}</label>
@@ -12,6 +12,7 @@ function TextInput({ label, type, placeholder, name, value, onChange, className 
         name={name}
         value={value}
         onChange={onChange}
+        required={required} // Add the required attribute based on the prop
       />
     </div>
   );
