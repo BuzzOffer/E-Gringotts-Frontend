@@ -41,8 +41,8 @@ export default function PaymentConfirm(){
                 destination_account_id_long: transaction.accountNumber,
                 category: transaction.category,
                 description: transaction.message,
-                sourceCurrency: transaction.currency,
-                destinationCurrency: transaction.currency
+                sourceCurrency: transaction.currency.toLowerCase(),
+                destinationCurrency: transaction.currency.toLowerCase()
             };
         }
 
@@ -92,6 +92,7 @@ export default function PaymentConfirm(){
                 setDestinationAccount(results[1]);
             } catch (error) {
                 setError(error);
+                console.log(error);
             }
         };
         fetchAccounts();
@@ -99,9 +100,9 @@ export default function PaymentConfirm(){
 
     console.log(destinationAccount);
 
-    if(!Object.keys(destinationAccount).length){
-        return <p>Loading...</p>
-    }
+    // if(!Object.keys(destinationAccount).length){
+    //     return <p>Loading...</p>
+    // }
 
     return (
         <>
@@ -113,7 +114,7 @@ export default function PaymentConfirm(){
                     <h2>Sender Details</h2>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Name</p>
-                        <p>{sourceAccount.myUser.name}</p>
+                        <p>{sourceAccount.myUser?.name}</p>
                     </div>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Account Number</p>
@@ -125,7 +126,7 @@ export default function PaymentConfirm(){
                     <h2>Receipient Details</h2>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Name</p>
-                        <p>{destinationAccount.myUser.name}</p>
+                        <p>{destinationAccount.myUser?.name}</p>
                     </div>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Account Number</p>
@@ -160,6 +161,7 @@ export default function PaymentConfirm(){
                     </button>
                 </section>
                 {loading && <LoadingOverlay />}
+                {error && <p>{error}</p>}
             </div>
         </>
     )
