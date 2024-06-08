@@ -56,8 +56,8 @@ export default function Statistics() {
     const [startDate, setStartDate] = useState(`${date} 00:00:00`);
     const [endDate, setEndDate] = useState(`${date} 23:59:59`);
     const [timeChartData, setTimeChartData] = useState(daily);
-    const getDaily = `getTransactionByDateTime?start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
-    const getMonthly = `getTransactionByDateTime?start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
+    const getDaily = `getTransactionByDateTime?id=2&start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
+    const getMonthly = `getTransactionByDateTime?id=2&start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
     const getAll = `all` //will change to get by acc id
     const [condition, setCondition] = useState(getDaily)
 
@@ -72,7 +72,7 @@ export default function Statistics() {
                 console.log(startDate);
                 console.log(endDate);
 
-                const newData = data.filter((object) => object.source_account_id_long === 24);
+                const newData = data.filter((object) => object.source_account_id_long === 2);
                 const categories = [];
                 const amounts = [];
                 const timestamps = [];
