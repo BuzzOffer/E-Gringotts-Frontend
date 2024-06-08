@@ -18,7 +18,12 @@ function LoginScreen() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
+        if (!email || !password) {
+            setErrorMessage('Email and Password are required');
+            return;
+        }
+    
         try {
             const response = await fetch('http://localhost:8080/api/v1/user/login', {
                 method: 'POST',
@@ -30,28 +35,38 @@ function LoginScreen() {
                     password: password,
                 }),
             });
-
+    
+            const text = await response.text(); // Read response as text
+    
+            console.log('Server response:', text); // Log the response for debugging
+    
             if (response.ok) {
-                const data = await response.json();
-                console.log('User logged in successfully:', data);
-                alert('User logged in successfully');
-                setErrorMessage('');
-            } else {
-                const errorText = await response.text();
-                let errorData;
                 try {
-                    errorData = JSON.parse(errorText);
+                    const data = JSON.parse(text); // Attempt to parse JSON
+                    console.log('User logged in successfully:', data);
+                    alert('User logged in successfully');
+                    setErrorMessage('');
                 } catch (e) {
-                    errorData = { message: errorText };
+                    console.error('Failed to parse JSON:', e);
+                    setErrorMessage('Unexpected server response');
                 }
-                console.error('Failed to login:', errorData);
-                setErrorMessage(`Failed to login: ${errorData.message || 'Unknown error'}`);
+            } else {
+                let errorMessage;
+                try {
+                    // server response for both wrong password, unregistered account {"status":500,"error":"Internal Server Error","message":"No message available","path":"/api/v1/user/login"}
+                    const message = "Unregistered Account or Wrong Password";
+                    errorMessage = `Failed to login: ${message}`;
+                } catch (e) {
+                    errorMessage = `Failed to login: ${text}`; // Use text response if JSON parsing fails
+                }
+                console.error(errorMessage);
+                setErrorMessage(errorMessage);
             }
         } catch (error) {
             console.error('Error:', error);
             setErrorMessage(`Error logging in: ${error.message}`);
         }
-    };
+    };    
 
     return (
         <div className="form-container">
