@@ -10,6 +10,8 @@ function RegisterScreen() {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [userType, setUserType] = useState('1'); // Default to Platinum Patronus
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
@@ -18,6 +20,8 @@ function RegisterScreen() {
         if (name === 'name') setName(value);
         if (name === 'password') setPassword(value);
         if (name === 'confirmPassword') setConfirmPassword(value);
+        if (name === 'phoneNumber') setPhoneNumber(value);
+        if (name === 'userType') setUserType(value);
     };
 
     const handleSubmit = async (e) => {
@@ -29,7 +33,7 @@ function RegisterScreen() {
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/v1/user/create?type=3', {
+            const response = await fetch(`http://localhost:8080/api/v1/user/create?type=${userType}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,6 +42,7 @@ function RegisterScreen() {
                     name: name,
                     email: email,
                     password: password,
+                    phoneNumber: phoneNumber,
                 }),
             });
 
@@ -63,8 +68,17 @@ function RegisterScreen() {
                 <FormTitle text="Register" />
                 <TextInput label="Email" type="email" placeholder="Enter your email here" name="email" value={email} onChange={handleChange} />
                 <TextInput label="Name" type="text" placeholder="Enter your name here" name="name" value={name} onChange={handleChange} />
+                <TextInput label="Phone Number" type="text" placeholder="Enter your phone number here" name="phoneNumber" value={phoneNumber} onChange={handleChange} />
                 <TextInput label="Password" type="password" placeholder="Enter your password here" name="password" value={password} onChange={handleChange} />
                 <TextInput label="Confirm Password" type="password" placeholder="Enter your password again" name="confirmPassword" value={confirmPassword} onChange={handleChange} />
+                <div className="form-group">
+                    <label htmlFor="userType">User Type</label>
+                    <select name="userType" value={userType} onChange={handleChange}>
+                        <option value="1">Platinum Patronus</option>
+                        <option value="2">Golden Galleon</option>
+                        <option value="3">Silver Snitch</option>
+                    </select>
+                </div>
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <SubmitButton text="Register" />
                 <AccountSwitch
