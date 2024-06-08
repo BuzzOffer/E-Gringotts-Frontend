@@ -16,7 +16,7 @@ export default function PieChart({ transactions }) {
     transactions.forEach((transaction) => {
         const currency = transaction.sourceCurrency;
         if(currency != null){
-            currencyCount[currency]++;
+            currencyCount[currency.toLowerCase()]++;
         }
     });
 
@@ -24,17 +24,12 @@ export default function PieChart({ transactions }) {
         labels: ["Galleon", "Sickle", "Knut"],
         datasets: [
           {
-            label: '# of Votes',
+            label: 'No. of transactions',
             data: Object.values(currencyCount),
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
+              '#DFA616',
+              '#6A6A6A',
+              '#955C23',
             ],
             borderWidth: 1,
           },

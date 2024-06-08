@@ -33,12 +33,12 @@ td{
     color: #A42929;
 }
 
-td:first-child{
+.transactionsBody td:first-child{
     border-top-left-radius: 15px; 
     border-bottom-left-radius: 15px;
 }
 
-td:last-child {
+.transactionsBody td:last-child {
     border-bottom-right-radius: 15px; 
     border-top-right-radius: 15px; 
 }

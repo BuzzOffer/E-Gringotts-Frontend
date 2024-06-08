@@ -31,7 +31,7 @@ export default function TransactionList({ transactions, id, error, loading }){
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody className={styles.transactionsBody}>
                     {loading && (
                         <tr>
                             <td className={styles.loadingContainer} colSpan="5"><Spinner /></td>

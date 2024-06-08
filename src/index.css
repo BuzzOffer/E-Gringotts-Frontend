@@ -18,6 +18,26 @@
   --lighter-yellow: #F4D890;
   --lightest-yellow: #F8E5B5;
   --white: #FFFFFF;
+
+  /* Date Picker */
+  --rdp-accent-color: red;
+  .rdp-day_today:not(.rdp-day_outside) {
+    font-weight: bold;
+    color: var(--primary-clr);
+  }
+
+  .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+    background-color: #000925;
+  }
+
+  .rdp-day_selected,
+  .rdp-day_selected:focus-visible,
+  .rdp-day_selected:hover {
+    color: var(--rdp-selected-color);
+    opacity: 1;
+    background-color: #000925;
+  }
+  
 }
 
 @font-face {
