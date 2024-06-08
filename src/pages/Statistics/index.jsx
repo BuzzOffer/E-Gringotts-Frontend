@@ -5,11 +5,13 @@ import './stats.css';
 import expensesData from './data/expensesData.json';
 import GraphSelect from './graphselect';
 import BackButton from './backbutton';
+import CurrencySelect from './currencyselect';
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
 export default function Statistics() {
+    const isAdmin = false;
 
     const daily = {
         labels: expensesData.map((data) => data.label),
@@ -56,10 +58,16 @@ export default function Statistics() {
     const [startDate, setStartDate] = useState(`${date} 00:00:00`);
     const [endDate, setEndDate] = useState(`${date} 23:59:59`);
     const [timeChartData, setTimeChartData] = useState(daily);
+    const [totalExpenses, setTotalExpenses] = useState(0);
     const getDaily = `getTransactionByDateTime?start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
     const getMonthly = `getTransactionByDateTime?start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
     const getAll = `all` //will change to get by acc id
-    const [condition, setCondition] = useState(getDaily)
+    const [condition, setCondition] = useState(getDaily);
+    const [currency, setCurrency] = useState("Knut");
+
+    const categories = [];
+    const amounts = [];
+    const timestamps = [];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,15 +76,19 @@ export default function Statistics() {
                 return res.json();
             })
             .then(data => {
-                console.log(data);
-                console.log(startDate);
-                console.log(endDate);
+                // console.log(data);
+                // console.log(startDate);
+                // console.log(endDate);
+                let newData = [];
 
-                const newData = data.filter((object) => object.source_account_id_long === 24);
-                const categories = [];
-                const amounts = [];
-                const timestamps = [];
+                if (!isAdmin) {
+                    newData = data.filter((object) => object.source_account_id_long === 24);
+                }
+                else {
+                    newData = data;
+                }
 
+                newData = newData.filter((object) => object.sourceCurrency === currency);
                 for (let transactions of newData) {
                     if (!categories.includes(transactions.category)) {
                         categories.push(transactions.category);
@@ -88,6 +100,10 @@ export default function Statistics() {
                     }
                     timestamps.push(transactions.dateTime);
                 }
+
+                setTotalExpenses(amounts.reduce((acc, currentVal) => {
+                    return acc + currentVal;
+                }, 0));
                 
                 setChartData({
                     labels: categories,
@@ -119,7 +135,7 @@ export default function Statistics() {
             
         }
         fetchData();
-    }, [condition])
+    }, [condition, currency])
 
     const onSelect = (event) => {
         switch(event.target.value) {
@@ -138,11 +154,19 @@ export default function Statistics() {
         }
     }
 
+    const onSelectCurrency = (event) => {
+        setCurrency(event.target.value);
+        console.log(currency)
+    }
+
     return (
         <>
             <h1>Statistics</h1>
             <BackButton />
-            <GraphSelect onOption={onSelect}/>
+            <div className="dropdownGroup">
+                <GraphSelect onOption={onSelect} />
+                <CurrencySelect onOption={onSelectCurrency} />
+            </div>
             <div className="visuals">
                 <div className="pieChart">
                     <Pie 
@@ -160,6 +184,7 @@ export default function Statistics() {
                     />
                 </div>
             </div>
+            <h2 id="totalExpenses">Total expenses: {totalExpenses}</h2>
         </>
     );
 }
