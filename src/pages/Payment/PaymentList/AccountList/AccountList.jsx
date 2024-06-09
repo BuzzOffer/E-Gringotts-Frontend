@@ -41,30 +41,42 @@ export default function AccountList({ data, onRecipientClicked, error, loading }
 
                 <tbody>
                     {/* {loading && <DataState message="loading list..."/>} */}
-                    {loading && <Spinner />}
+                    {loading && (
+                        <tr>
+                            <td className={styles.loadingContainer} colSpan="4">
+                                <Spinner />
+                            </td>
+                        </tr>
+                    )}
 
                     {error && <DataState message="Error loading the list"/>}
 
-                    {!loading && !error && currentLists.length === 0 ? (
-                        <DataState message="No users found"/>
-                    ) : (
-                        currentLists.map(({ account }) => {
-                            const { id: accNum, myUser: { name, phoneNumber } } = account;
-                            return (
-                                <tr key={accNum}>
-                                    <td>{name}</td>
-                                    <td>{phoneNumber}</td>
-                                    <td>{account.id}</td>
-                                    <td>
-                                        <button className={styles.transferBtn} onClick={() => onRecipientClicked(accNum)}>Transfer</button>
-                                    </td>
-                                </tr>
-                            );
-                        })
+                    {!loading && !error && (
+                        currentLists.length === 0 ? (
+                            <tr>
+                                <td colSpan="4">
+                                    <DataState message="No users found" />
+                                </td>
+                            </tr>
+                        ) : (
+                            currentLists.map(({ account }) => {
+                                const { id: accNum, myUser: { name, phoneNumber } } = account;
+                                return (
+                                    <tr key={accNum}>
+                                        <td>{name}</td>
+                                        <td>{phoneNumber}</td>
+                                        <td>{accNum}</td>
+                                        <td>
+                                            <button className={styles.transferBtn} onClick={() => onRecipientClicked(accNum)}>Transfer</button>
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                        )
                     )}
                 </tbody>
             </table>
-            <PaginationButton currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange}/>  
+            {!loading && !error && <PaginationButton currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange}/>}
         </>
     );
 };

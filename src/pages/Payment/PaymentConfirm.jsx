@@ -8,6 +8,7 @@ export default function PaymentConfirm(){
     const navigate = useNavigate();
     const { state: { transaction, userId } } = useLocation();
     const [destinationAccount, setDestinationAccount] = useState({});
+    const [sourceAccount, setSourceAccount] = useState({});
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
     // const [transactionData, setTransactionData] = useState({});
@@ -32,16 +33,16 @@ export default function PaymentConfirm(){
         console.log(destinationAccount);
         let transactionData = {};
 
-        if(transaction && destinationAccount) {
+        if(transaction && destinationAccount && sourceAccount) {
             transactionData = {
                 amount: transaction.amount,
                 dateTime: today,
-                source_account_id_long: userId, 
+                source_account_id_long: sourceAccount.id, 
                 destination_account_id_long: transaction.accountNumber,
                 category: transaction.category,
                 description: transaction.message,
-                sourceCurrency: transaction.currency,
-                destinationCurrency: transaction.currency
+                sourceCurrency: transaction.currency.toLowerCase(),
+                destinationCurrency: transaction.currency.toLowerCase()
             };
         }
 
@@ -65,8 +66,7 @@ export default function PaymentConfirm(){
                 navigate("/payment/confirmation/receipt",
                     {
                         state: {
-                            date: today,
-                            userId: userId
+                            accountId: sourceAccount.id
                         }
                     }
                 )
@@ -80,23 +80,29 @@ export default function PaymentConfirm(){
     }
 
     useEffect(() => {
-        const fetchAccount = async () => {
+        const baseUrl = import.meta.env.VITE_API_URL;
+        const endpoints = [`${baseUrl}/account/getByUserId?id=${userId}`, `${baseUrl}/account/get?id=${transaction.accountNumber}`]
+        const fetchAccounts = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/account/get?id=${transaction.accountNumber}`);
-                const data = await response.json();
-                setDestinationAccount(data);
+                const results = await Promise.all(
+                    endpoints.map((endpoint) => fetch(endpoint).then((res) => res.json()))
+                );
+                console.log(results)
+                setSourceAccount(results[0]);
+                setDestinationAccount(results[1]);
             } catch (error) {
                 setError(error);
+                console.log(error);
             }
         };
-        fetchAccount();
+        fetchAccounts();
     }, [])
 
     console.log(destinationAccount);
 
-    if(!Object.keys(destinationAccount).length){
-        return <p>Loading...</p>
-    }
+    // if(!Object.keys(destinationAccount).length){
+    //     return <p>Loading...</p>
+    // }
 
     return (
         <>
@@ -108,11 +114,11 @@ export default function PaymentConfirm(){
                     <h2>Sender Details</h2>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Name</p>
-                        <p>Heng Wen Yang</p>
+                        <p>{sourceAccount.myUser?.name}</p>
                     </div>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Account Number</p>
-                        <p>123456789</p>
+                        <p>{sourceAccount.id}</p>
                     </div>
                 </section>
 
@@ -120,7 +126,7 @@ export default function PaymentConfirm(){
                     <h2>Receipient Details</h2>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Name</p>
-                        <p>{destinationAccount.myUser.name}</p>
+                        <p>{destinationAccount.myUser?.name}</p>
                     </div>
                     <div className={styles.userInfo}>
                         <p className={styles.label}>Account Number</p>
@@ -155,6 +161,7 @@ export default function PaymentConfirm(){
                     </button>
                 </section>
                 {loading && <LoadingOverlay />}
+                {error && <p>{error}</p>}
             </div>
         </>
     )

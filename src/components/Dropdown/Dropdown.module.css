@@ -1,3 +1,4 @@
 .dropdownContainer{
     position: relative;
+    min-width: 10rem;
 }
