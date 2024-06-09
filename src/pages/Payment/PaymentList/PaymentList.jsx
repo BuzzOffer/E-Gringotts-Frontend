@@ -61,7 +61,8 @@ export default function PaymentList() {
     const searchTerm = e.target.value;
     setQuery(searchTerm);
     const filteredItems = favourites.filter((item) => 
-      item.account.myUser.name.toLowerCase().includes(searchTerm.toLowerCase())
+      item.account.myUser.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      item.account.myUser.phoneNumber.includes(searchTerm)
     );
 
     setFilteredList(filteredItems);
