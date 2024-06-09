@@ -76,3 +76,10 @@
     border-color: #FFD700;
     /* Optional: Adjust the border color on hover if needed */
 }
+
+.error-message {
+    color: red;
+    /* Red text color */
+    margin-top: 5px;
+    /* Small margin to separate the error message from the input field */
+}
