@@ -165,7 +165,7 @@ export default function Home(){
                 </>
             )}
 
-            {user.status === "goblin" && <Admin />}
+            {user?.status === "goblin" && <Admin />}
         </>
     );
 }
