@@ -3,14 +3,16 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import styles from "./Transaction.module.css";
 import TransactionList from "./TransactionList/TransactionList";
 import { ApiDateFormat } from "../../utils/DateFormatting";
+import { useAuth } from "../../context/AuthContext";
 
 const lastNDays = [15, 10, 5];
 const categories = ["Entertainment", "Food", "Misc.", "Game"]
 const types = ["Sent", "Receive", "Convert"];
-const id = 2;
 
 export default function Transaction(){
 
+    const { user } = useAuth();
+    const id = user.id;
     const [selectedDays, setSelectedDays] = useState(lastNDays[0]);
     const [selectedCateory, setSelectedCategory] = useState("Category");
     const [selectedType, setSelectedType] = useState("Type");

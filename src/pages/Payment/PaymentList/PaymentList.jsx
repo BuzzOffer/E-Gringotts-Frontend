@@ -5,11 +5,12 @@ import AccountList from './AccountList/AccountList';
 import AddAccount from './AddAccount';
 import SearchBar from './SearchBar';
 import styles from './PaymentList.module.css';
+import { useAuth } from '../../../context/AuthContext';
 
 const BASE_URL = 'http://localhost:8080/api/v1';
 export default function PaymentList() {
 
-  const id = 2;
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [favourites, setFavourites] = useState([]);
@@ -22,7 +23,7 @@ export default function PaymentList() {
   const toPaymentDetails = (selectedAccount) => {
     navigate(
       '/payment/new-transfer', 
-      { state: { account: selectedAccount, userId: id } }
+      { state: { account: selectedAccount, userId: user.id } }
     );
   };
 
@@ -39,7 +40,7 @@ export default function PaymentList() {
   useEffect(() => {
     const fetchFavourites = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/favourites/all?id=${id}`);
+            const response = await fetch(`${BASE_URL}/favourites/all?id=${user.id}`);
             if(response.ok) {
               const data = await response.json();
               setFavourites(data);
@@ -72,7 +73,7 @@ export default function PaymentList() {
       <h1>Payment</h1>
       <div className={styles.paymentContainer}>
         <SearchBar handleInputChange={handleInputChange} query={query}/>
-        <AddAccount userId={id}/>
+        <AddAccount userId={user.id}/>
         <AccountList error={error} loading={loading} data={filteredList} onRecipientClicked={onRecipientClicked}/>
       </div>
       {!loading && !error && (

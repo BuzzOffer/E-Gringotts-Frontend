@@ -12,8 +12,10 @@ import { convert } from './converter.js';
 import Spinner from '../../components/Spinner/Spinner.jsx';
 import { ApiDateFormat } from '../../utils/DateFormatting.js';
 import Admin from './Admin/index.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 
-export default function Home({ userId }){
+export default function Home(){
+    const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
     const [userInfo, setUserInfo] = useState({});
@@ -51,9 +53,8 @@ export default function Home({ userId }){
 
     const fetchUser = async () => {
         setLoading(true);
-        userId = 2;
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/getByUserId?id=${userId}`)
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/getByUserId?id=${user.id}`)
             const data = await response.json();
             console.log(data);
             setUserInfo(data);
@@ -164,7 +165,7 @@ export default function Home({ userId }){
                 </>
             )}
 
-            <Admin />
+            {user.status === "gobblin" && <Admin />}
         </>
     );
 }

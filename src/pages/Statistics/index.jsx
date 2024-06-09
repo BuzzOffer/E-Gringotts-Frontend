@@ -6,11 +6,13 @@ import expensesData from './data/expensesData.json';
 import GraphSelect from './graphselect';
 import BackButton from './backbutton';
 import CurrencySelect from './currencyselect';
+import { useAuth } from '../../context/AuthContext';
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
 export default function Statistics() {
+    const { user } = useAuth();
     const isAdmin = false;
 
     const daily = {
@@ -59,8 +61,8 @@ export default function Statistics() {
     const [endDate, setEndDate] = useState(`${date} 23:59:59`);
     const [timeChartData, setTimeChartData] = useState(daily);
     const [totalExpenses, setTotalExpenses] = useState(0);
-    const getDaily = `getTransactionByDateTime?id=2&start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
-    const getMonthly = `getTransactionByDateTime?id=2&start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
+    const getDaily = `getTransactionByDateTime?start=${date} 00:00:00&end=${date} 23:59:59` //will change to get by acc id and by datetime
+    const getMonthly = `getTransactionByDateTime?start=${yearMonth}-01 00:00:00&end=${yearMonth}-${lastDayOfMonth} 23:59:59` //will change to get by acc id and by datetime
     const getAll = `all` //will change to get by acc id
     const [condition, setCondition] = useState(getDaily);
     const [currency, setCurrency] = useState("Knut");
@@ -82,7 +84,7 @@ export default function Statistics() {
                 let newData = [];
 
                 if (!isAdmin) {
-                    newData = data.filter((object) => object.source_account_id_long === 2);
+                    newData = data.filter((object) => object.source_account_id_long === user.id);
                 }
                 else {
                     newData = data;
