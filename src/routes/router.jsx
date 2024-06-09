@@ -6,6 +6,7 @@ import { PaymentRoute } from "./payment";
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Statistics from '../pages/Statistics';
+import ProtectedRoutes from "./ProtectedRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -14,11 +15,15 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: <Home />
+            element: (
+              <ProtectedRoutes>
+                <Home />
+              </ProtectedRoutes>
+            )
           },
           {
             path: "transaction",
-            element: <Transaction />,
+            element: <ProtectedRoutes><Transaction /></ProtectedRoutes>,
           },
           PaymentRoute,
           {
@@ -31,7 +36,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "statistics",
-            element: <Statistics />,
+            element: <ProtectedRoutes><Statistics /></ProtectedRoutes>,
           },
         ],
       }

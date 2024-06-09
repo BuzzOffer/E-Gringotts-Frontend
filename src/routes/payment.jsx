@@ -4,10 +4,11 @@ import PaymentList from '../pages/Payment/PaymentList/PaymentList';
 import PaymentReceipt from '../pages/Payment/PaymentReceipt';
 import TransactionForm from '../pages/Payment/NewTransfer/TransactionForm';
 import AddAccountScreen from '../pages/Payment/AddNewAccount';
+import ProtectedRoutes from './ProtectedRoutes';
 
 export const PaymentRoute = {
   path: 'payment',
-  element: <Payment />,
+  element: <ProtectedRoutes><Payment /></ProtectedRoutes>,
   children: [
     { index: true, element: <PaymentList /> },
     {
