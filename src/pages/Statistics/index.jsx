@@ -6,11 +6,13 @@ import expensesData from './data/expensesData.json';
 import GraphSelect from './graphselect';
 import BackButton from './backbutton';
 import CurrencySelect from './currencyselect';
+import { useAuth } from '../../context/AuthContext';
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
 export default function Statistics() {
+    const { user } = useAuth();
     const isAdmin = false;
 
     const daily = {
@@ -82,7 +84,7 @@ export default function Statistics() {
                 let newData = [];
 
                 if (!isAdmin) {
-                    newData = data.filter((object) => object.source_account_id_long === 24);
+                    newData = data.filter((object) => object.source_account_id_long === user.id);
                 }
                 else {
                     newData = data;

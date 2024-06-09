@@ -1,27 +1,7 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./PaymentReceipt.module.css";
-
-const transactionDetails = [
-    {
-        label: "Transasction ID",
-        value: "TRX123456"
-    },
-    {
-        label: "Date & Time",
-        value: "11 April 2024, 3:00 PM"
-    },
-    {
-        label: "From",
-        value: "Wen Yang"
-    },
-    {
-        label: "To",
-        value: "Simon"
-    },
-    {
-        label: "Reference",
-        value: "Something"
-    },
-];
+import { useEffect, useState } from "react";
+import Spinner from "../../components/Spinner/Spinner";
 
 const TickIcon = ({ color }) => (
     <svg 
@@ -35,23 +15,83 @@ const TickIcon = ({ color }) => (
 )
 
 export default function PaymentReceipt(){
+
+    const navigate = useNavigate();
+    const { state: { accountId } } = useLocation();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+    const [transactionDetails, setTransactionDetails] = useState([]);
+    const [amount, setAmount] = useState();
+
+    useEffect(() => {
+        const fetchReceipt = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getLatestByAccountId?id=${accountId}`);
+                const data = await response.json();
+                setTransactionDetails([
+                    {
+                        label: "Transasction ID",
+                        value: data.id
+                    },
+                    {
+                        label: "Date & Time",
+                        value: data.dateTime
+                    },
+                    {
+                        label: "From",
+                        value: data.sourceAccount.myUser.name
+                    },
+                    {
+                        label: "To",
+                        value: data.destinationAccount.myUser.name
+                    },
+                    {
+                        label: "Reference",
+                        value: data.description
+                    },
+                ]);
+                setAmount(`${data.amount} ${data.destinationCurrency}`);
+            } catch (error) {
+                console.log(error);
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchReceipt();
+    }, [])
+
+    const onContinueClicked = () => {
+        navigate("/");
+    }
+
     return(
         <>
             <div className={styles.receiptContainer}>
                 <h1>E-Gringotts Receipt</h1>
-                <div className={styles.statusContainer}>
-                    <TickIcon color={"#2EAE01"}/>
-                    <p className={styles.amount}>50.00 Knut</p>
-                    <p className={styles.status}>Payment Successfull</p>
-                </div>
+                {loading && <div className={styles.loadingContainer}><Spinner /></div>}
 
-                {transactionDetails.map((item) => (
-                    <div className={styles.detailsContainer} key={item.label}>
-                        <p className={styles.label}>{item.label}</p>
-                        <p className={styles.value}>{item.value}</p>
-                    </div>
-                ))}
-                <button className={styles.continueBtn} type="button">Continue</button>
+                {error && <p>Failed to load receipt. Please refresh the page.</p>}
+
+                {!loading && !error && (
+                    <>
+                        <div className={styles.statusContainer}>
+                            <TickIcon color={"#2EAE01"}/>
+                            <p className={styles.amount}>{amount}</p>
+                            <p className={styles.status}>Payment Successfull</p>
+                        </div>
+
+                        {transactionDetails.map((item) => (
+                            <div className={styles.detailsContainer} key={item.label}>
+                                <p className={styles.label}>{item.label}</p>
+                                <p className={styles.value}>{item.value}</p>
+                            </div>
+                        ))}
+                        <button className={styles.continueBtn} type="button" onClick={onContinueClicked}>Continue</button>                    
+                    </>
+                )}
             </div>
         </>
     )

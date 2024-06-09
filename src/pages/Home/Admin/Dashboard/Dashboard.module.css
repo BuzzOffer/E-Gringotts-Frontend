@@ -1,0 +1,92 @@
+.header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.calenderBtn {
+    background-color: var(--background-clr-lighter);
+    border: 0;
+    border-radius: 10px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.calenderBtnOpen {
+    background-color: #355DD4;
+}
+
+.datePickerContainer {
+    display: none;
+    margin-bottom: 1.5rem;
+}
+
+.datePickerContainerOpen {
+    display: flex;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 15px;
+}
+
+.buttonContainer button {
+    border: 0;
+    border-radius: 10px;
+    padding: 5px 25px;
+    background-color: var(--primary-clr);
+    color: white;
+    cursor: pointer;
+}
+
+.buttonContainer .resetBtn {
+    background-color: transparent;
+    padding: 0;
+}
+
+.buttonContainer .closeBtn {
+    background-color: #142459;
+    margin-left: auto;
+}
+
+.promptContainer {
+    margin-top: 1.5rem;
+}
+
+.dashboardContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 2;
+}
+
+.content {
+    background-color: var(--background-clr-lighter);
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 3rem;
+}
+
+.value {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--primary-clr);
+    line-height: 1;
+}
+
+.caption {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.pieChart {
+    grid-column: span 2;
+    height: 30rem;
+}

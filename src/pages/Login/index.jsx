@@ -4,11 +4,15 @@ import TextInput from '../../components/registration/TextInput';
 import '../../components/registration/Form.css';
 import SubmitButton from '../../components/registration/SubmitButton';
 import AccountSwitch from '../../components/registration/AccountSwitch';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function LoginScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -46,6 +50,8 @@ function LoginScreen() {
                     console.log('User logged in successfully:', data);
                     alert('User logged in successfully');
                     setErrorMessage('');
+                    login(data);
+                    navigate("/");
                 } catch (e) {
                     console.error('Failed to parse JSON:', e);
                     setErrorMessage('Unexpected server response');

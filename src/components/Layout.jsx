@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
+import { useAuth } from "../context/AuthContext";
 
 export default function Layout(){
+    const { user } = useAuth();
     return(
         <>
-            <Navbar/>
+            {user && <Navbar/>}
             <Outlet/>
         </>
     );

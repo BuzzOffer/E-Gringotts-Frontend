@@ -14,6 +14,13 @@ h1{
     gap: 2rem;
     list-style-type: none;
     font-size: 1.3rem;
+    align-items: center;
+}
+
+.logoutBtn {
+    background-color: transparent;
+    border: 0;
+    color: var(--primary-clr);
 }
 
 li{
@@ -21,8 +28,27 @@ li{
     border-radius: 10px;
 }
 
+li button {
+    cursor: pointer;
+}
+
 li:hover{
     background-color: var(--background-clr-lighter);
+}
+
+li:last-child {
+    border: 1px solid var(--primary-clr);
+    padding: 5px 20px;
+    border-radius: 30px;
+    color: var(--primary-clr)
+}
+
+li:last-child:hover {
+    background-color: var(--primary-clr);
+}
+
+.logoutBtn:hover {
+    color: white;
 }
 
 a{
