@@ -1,0 +1,85 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* Full height */
+    background-color: var(--dark-blue);
+    /* Dark blue background */
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* This centers the child elements (text inputs) horizontally */
+        width: 60%;
+    }
+}
+
+.form-container-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Align items to the start of the container vertically */
+    padding-top: 50px;
+    /* Provides some spacing from the top */
+    background-color: var(--dark-blue);
+    /* Dark blue background */
+    min-height: 100vh;
+    /* Ensures the container takes at least the full height of the viewport */
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* This centers the child elements (text inputs) horizontally */
+        width: 60%;
+    }
+
+    .header {
+        width: 80%;
+    }
+}
+
+.back-button {
+    justify-content: flex-start;
+    /* Align items to the start of the container vertically */
+    color: var(--dark-yellow);
+    /* Gold text color */
+    background-color: transparent;
+    /* Transparent background */
+    padding: 10px 30px;
+    /* Padding to make the button larger and easier to click */
+    font-size: 16px;
+    /* Appropriate text size */
+    border-radius: 30px;
+    /* Fully rounded corners */
+    border: 2px solid var(--dark-yellow);
+    /* Gold border to match the text color */
+    cursor: pointer;
+    /* Changes the cursor to a pointer to indicate it's clickable */
+    display: inline-block;
+    /* Allows setting margins and padding correctly */
+    text-decoration: none;
+    /* Ensures no underline is present */
+    transition: background-color 0.3s, color 0.3s;
+    /* Smooth transition for hover effects*/
+}
+
+.back-button:hover {
+    color: black;
+    /* Text color on hover */
+    background-color: #FFD700;
+    /* Background color changes to gold on hover */
+    border-color: #FFD700;
+    /* Optional: Adjust the border color on hover if needed */
+}
+
+.error-message {
+    color: red;
+    /* Red text color */
+    margin-top: 5px;
+    /* Small margin to separate the error message from the input field */
+}

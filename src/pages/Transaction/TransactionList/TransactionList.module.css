@@ -1,0 +1,76 @@
+table{
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1.25rem;
+}
+th{
+    text-align: left;
+    font-weight: 300;
+}
+
+th, td{
+    padding: 1rem;
+}
+
+td{
+    background-color: var(--background-clr-lighter);
+    border: solid 1px var(--background-clr-lighter);
+}
+
+.loadingContainer{
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+}
+
+.receive{
+    color: #40B52C;
+}
+
+.sent{
+    color: #A42929;
+}
+
+.transactionsBody td:first-child{
+    border-top-left-radius: 15px; 
+    border-bottom-left-radius: 15px;
+}
+
+.transactionsBody td:last-child {
+    border-bottom-right-radius: 15px; 
+    border-top-right-radius: 15px; 
+}
+
+.paginationContainer{
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.paginationContainer button{
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+}
+
+.paginationContainer .navigationBtn{
+    background-color: var(--primary-clr);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginationContainer .disabledBtn{
+    opacity: 0.4;
+    cursor: default;
+}
+
+.paginationContainer .active{
+    background-color: #355DD4;
+    color: white;
+}

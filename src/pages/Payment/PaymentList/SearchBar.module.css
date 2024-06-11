@@ -1,0 +1,25 @@
+.searchContainer{
+    background-color: var(--background-clr-lighter);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.searchInput{
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: 100%;
+}
+
+.searchInput:focus {
+    outline: none;
+}
+
+.cancelBtn{
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
