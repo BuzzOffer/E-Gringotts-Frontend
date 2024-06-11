@@ -37,7 +37,7 @@ export default function Statistics() {
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
-    const day = today.getDate()
+    const day = today.getDate() + 1;
     const yearMonth = `${year}-${month < 10 ? `0${month}` : `${month}`}`
     const date = `${yearMonth}-${day < 10 ? `0${day}` : `${day}`}`
     var lastDayOfMonth;
@@ -66,10 +66,25 @@ export default function Statistics() {
     const getAll = `all` //will change to get by acc id
     const [condition, setCondition] = useState(getDaily);
     const [currency, setCurrency] = useState("Knut");
+    const [accountId, setAccountId] = useState();
 
     const categories = [];
     const amounts = [];
     const timestamps = [];
+    
+    useEffect(() => {
+        const fetchAccount = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/account/getByUserId?id=${user.id}`)
+                const data = await response.json();
+                setAccountId(data.id);
+            } catch (error) {
+                setError(error);
+                console.log(error);
+            }
+        }
+        fetchAccount()
+    }, [])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -84,7 +99,7 @@ export default function Statistics() {
                 let newData = [];
 
                 if (!isAdmin) {
-                    newData = data.filter((object) => object.source_account_id_long === user.id);
+                    newData = data.filter((object) => object.source_account_id_long === accountId);
                 }
                 else {
                     newData = data;
@@ -136,8 +151,10 @@ export default function Statistics() {
             })
             
         }
-        fetchData();
-    }, [condition, currency])
+        if(accountId){
+            fetchData();
+        }
+    }, [accountId, condition, currency])
 
     const onSelect = (event) => {
         switch(event.target.value) {

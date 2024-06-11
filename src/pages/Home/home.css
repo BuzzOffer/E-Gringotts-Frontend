@@ -1,3 +1,40 @@
+.usernameContainer {
+    display: flex;
+    align-items: center;
+}
+
+.userType {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: black;
+    font-size: 14px;
+}
+
+.platinum {
+    --platinum-clr: #91FFC5;
+    border-color: var(--platinum-clr);
+    color: var(--platinum-clr);
+}
+
+.golden {
+    --golden-clr: #CAB06E;
+    border-color: var(--golden-clr);
+    color: var(--golden-clr);
+}
+
+.silver {
+    --silver-clr: #E5E4E2;
+    border-color: var(--silver-clr);
+    color: var(--silver-clr);
+}
+
+.goblin {
+    --goblin-clr: #994242;
+    border-color: var(--goblin-clr);
+    color: var(--goblin-clr);
+}   
+
 #balance {
     background-color: #172141;
     color: #FFFFFF;
