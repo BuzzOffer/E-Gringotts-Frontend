@@ -12,7 +12,7 @@ const types = ["Sent", "Receive", "Convert"];
 export default function Transaction(){
 
     const { user } = useAuth();
-    const id = user.id;
+    const [accountId, setAccountId] = useState();
     const [selectedDays, setSelectedDays] = useState(lastNDays[0]);
     const [selectedCateory, setSelectedCategory] = useState("Category");
     const [selectedType, setSelectedType] = useState("Type");
@@ -20,6 +20,23 @@ export default function Transaction(){
     const [transactions, setTransactions] = useState([]);
     const [filteredTransactions, setFilteredTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchAccount = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/account/getByUserId?id=${user.id}`)
+                const data = await response.json();
+                setAccountId(data.id);
+            } catch (error) {
+                setError(error);
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchAccount()
+    }, [])
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -30,7 +47,10 @@ export default function Transaction(){
                 const start = new Date();
                 start.setDate(start.getDate() - selectedDays);
                 today.setDate(today.getDate() + 1);
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getTransactionByIdDateTime?id=${id}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
+                console.log(ApiDateFormat(start));
+                console.log(ApiDateFormat(today));
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getTransactionByIdDateTime?id=${accountId}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
+
                 const data = await response.json();
                 data.reverse();
                 setTransactions(data);
@@ -43,8 +63,10 @@ export default function Transaction(){
             }
         };
 
-        fetchTransactions();
-    }, [selectedDays]);
+        if(accountId){
+            fetchTransactions();
+        }
+    }, [accountId, selectedDays]);
 
     const handleDaysChange = (days) =>{
         setSelectedDays(days);
@@ -70,13 +92,13 @@ export default function Transaction(){
         let filteredTransactions;
         switch(item){
             case "Sent":
-                filteredTransactions = transactions.filter(tx => tx.source_account_id_long === id);
+                filteredTransactions = transactions.filter(tx => tx.source_account_id_long === accountId);
                 break;
             case "Receive":
-                filteredTransactions = transactions.filter(tx => tx.destination_account_id_long === id);
+                filteredTransactions = transactions.filter(tx => (tx.destination_account_id_long === accountId) && tx.sourceCurrency === tx.destinationCurrency);
                 break;
             case "Convert":
-                filteredTransactions = transactions.filter(tx => tx.destination_account_id_long === tx.source_account_id_long);
+                filteredTransactions = transactions.filter(tx => tx.sourceCurrency !== tx.destinationCurrency);
                 break;
             default:
                 filteredTransactions = transactions;
@@ -103,7 +125,7 @@ export default function Transaction(){
                 <Dropdown label={selectedType} options={types} onOptionClicked={handleTypeChange}/>
             </div>
             <button onClick={clearFilters}>Clear Filter</button>
-            <TransactionList transactions={filteredTransactions} id={id} error={error} loading={loading}/>
+            <TransactionList transactions={filteredTransactions} id={accountId} error={error} loading={loading}/>
         </>
     )
 }

@@ -24,6 +24,8 @@ export default function Home(){
     const [toCurrency, setToCurrency] = useState("Knut");
     const [inputAmt, setInputAmt] = useState(1.00);
     const [convertedAmt, setConvertedAmt] = useState(29.00);
+    const [accountCreated, setAccountCreated] = useState(false);
+
     const onOptionSelectFrom = (event) => {
         let selected = event.target.value;
         setFromCurrency(selected);
@@ -57,13 +59,7 @@ export default function Home(){
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/account/getByUserId?id=${user.id}`)
             const data = await response.json();
-            
-            // no account associated with this user id
-            if(data === null) {
-                await createAccount();
-            } else {
-                setUserInfo(data);
-            }
+            setUserInfo(data);
         
 
         } catch (error) {
@@ -73,10 +69,6 @@ export default function Home(){
             setLoading(false);
         }
     };
-
-    useEffect(() => {
-        fetchUser();
-    }, [])
 
     const createAccount = async () => {
         const accountData = {
@@ -100,17 +92,27 @@ export default function Home(){
             const response = await fetch(`${import.meta.env.VITE_API_URL}/account/create`, settings);
             if(response.ok) {
                 console.log("Account created");
-                await fetchUser();
             } else {
-                throw new Error("Failed to create account");
+                const error = await response.json();
+                console.log(error.message);
             }
         } catch (error) {
             setError(error);
             console.log(error);
         } finally {
             setLoading(false);
+            setAccountCreated(true);
         }
+
     }
+
+    useEffect(() => {
+        createAccount();
+    }, []);
+
+    useEffect(() => {
+        fetchUser();
+    }, [accountCreated])
 
     const handleConversion = async () => {
         console.log("clicked");

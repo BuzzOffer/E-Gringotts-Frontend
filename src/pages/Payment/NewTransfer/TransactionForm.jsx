@@ -7,6 +7,8 @@ import PaymentContainer from './PaymentContainer';
 import '../../../components/registration/Form.css';
 import './TransactionForm.css'; // Make sure to import the CSS
 import Dropdown from '../../../components/Dropdown/Dropdown';
+import { useAuth } from '../../../context/AuthContext';
+import LoadingOverlay from '../../../components/LoadingOverlay/LoadingOverlay';
 
 const categories = ["Entertainment", "Food", "Misc.", "Game"];
 
@@ -15,6 +17,7 @@ const ErrorMessage = ({ error }) => {
 }
 
 const TransactionForm = () => {
+  const { user } = useAuth();
   const [currency, setCurrency] = useState('Sickle');
   const [accountNumber, setAccountNumber] = useState('');
   const [amount, setAmount] = useState('');
@@ -22,29 +25,57 @@ const TransactionForm = () => {
   const [message, setMessage] = useState('');
   const [inputErrors, setInputErrors] = useState({});
   const { state: { account, userId } } = useLocation();
+  const [balances, setBalances] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    const fetchBalances = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/account/getByUserId?id=${user.id}`);
+        const data = await response.json();
+        setBalances({
+          Galleon: data?.galleon_balance,
+          Sickle: data?.sickle_balance,
+          Knut: data?.knut_balance
+        });
+      } catch (error) {
+        console.log(error);
+      }  finally {
+        setLoading(false);
+      }
+    }
+
     if (account !== undefined) {
       setAccountNumber(account);
     }
+
+    fetchBalances();
   }, [account]);  
 
   const onOptionClicked = (category) => {
     setCategory(category);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = {};
 
     if(!accountNumber) {
       errors.accountNumber = "Account number is required";
+    } else if(isNaN(accountNumber)) {
+      errors.accountNumber = "Account must be numeric";
     }
 
     if(!amount) {
       errors.amount = "Amount is required";
+    } else if (isNaN(amount) || amount <= 0) {
+      errors.amount = "Invalid amount";
+    } else if (amount > balances[currency]) {
+      errors.amount = "Insufficient amount";
     }
 
     if(category === "Select category") {
@@ -53,6 +84,22 @@ const TransactionForm = () => {
 
     if(!message.trim()) {
       errors.message = "Please enter a message";
+    }
+
+    // check if account exist
+    if(!isNaN(accountNumber)) {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/account/get?id=${accountNumber}`)
+        if(!response.ok) {
+          const error = await response.json();
+          errors.accountNumber = error.message;
+        }
+      } catch (error) {
+        console.log(error)
+        errors.accountNumber = "Failed to fetch account details";
+      } finally {
+        setLoading(false);
+      }
     }
 
     setInputErrors(errors);
@@ -134,7 +181,7 @@ const TransactionForm = () => {
                 />
                 <span className="currency-unit">{currency}</span>
               </div>
-              {inputErrors.amount && <ErrorMessage error={inputErrors.amount}/>}
+              {inputErrors.amount && !loading && <ErrorMessage error={inputErrors.amount}/>}
             </div>
             {/* <div className="input-container">
               <TextInput
@@ -149,7 +196,7 @@ const TransactionForm = () => {
             </div> */}
             <div className="dropdownContainer">
               <Dropdown label={category} options={categories} onOptionClicked={onOptionClicked}/>
-              {inputErrors.category && <ErrorMessage error={inputErrors.category}/>}
+              {inputErrors.category && !loading && <ErrorMessage error={inputErrors.category}/>}
             </div>
           </div>
           <TextInput
@@ -161,10 +208,11 @@ const TransactionForm = () => {
             onChange={(e) => setMessage(e.target.value)}
             className="text-input_2"
           />
-          {inputErrors.message && <ErrorMessage error={inputErrors.message}/>}
+          {inputErrors.message && !loading && <ErrorMessage error={inputErrors.message}/>}
           <SubmitButton text="Proceed" position="right" type="submit"/>
         </form>
       </PaymentContainer>
+      {loading && <LoadingOverlay />}
     </div>
   );
 };

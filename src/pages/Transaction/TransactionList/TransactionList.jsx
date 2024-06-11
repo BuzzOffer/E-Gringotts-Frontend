@@ -17,6 +17,10 @@ export default function TransactionList({ transactions, id, error, loading }){
     const handlePageChange = (page) =>{
         setCurrentPage(page)
     }
+
+    const capitalize = (s) => {
+        return s[0].toUpperCase() + s.slice(1).toLowerCase();
+    }
     
     return (
         <>
@@ -45,15 +49,16 @@ export default function TransactionList({ transactions, id, error, loading }){
                     )}
 
                     {!error && !loading && currentLists.length > 0 && currentLists.map((item) => {
-                        const isReceive = item.destination_account_id_long === id;
-                        const type = isReceive ? "Receive" : "Sent";
+                        const isReceive = (item.destination_account_id_long === id);
+                        const isConvert = item.sourceCurrency !== item.destinationCurrency;
+                        const type = isReceive ? (isConvert ? "Convert" : "Receive") : "Sent";
                         const amountClass = isReceive ? styles.receive : styles.sent;
                         return (
                             <tr key={item.id}>
                                 <td>{type}</td>
-                                <td>{item.destinationAccount.myUser.name}</td>
+                                <td>{isReceive? item.sourceAccount.myUser.name : item.destinationAccount.myUser.name}</td>
                                 <td>{item.category}</td>
-                                <td className={amountClass}>{item.amount}</td>
+                                <td className={amountClass}>{item.amount} {isConvert ? capitalize(item.destinationCurrency) : capitalize(item.sourceCurrency)}</td>
                                 <td>{item.dateTime || "-"}</td>
                             </tr>
                         );
