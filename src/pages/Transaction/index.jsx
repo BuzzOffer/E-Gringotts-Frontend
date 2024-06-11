@@ -30,7 +30,7 @@ export default function Transaction(){
                 const start = new Date();
                 start.setDate(start.getDate() - selectedDays);
                 today.setDate(today.getDate() + 1);
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getTransactionByDateTime?id=${id}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getTransactionByIdDateTime?id=${id}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
                 const data = await response.json();
                 data.reverse();
                 setTransactions(data);

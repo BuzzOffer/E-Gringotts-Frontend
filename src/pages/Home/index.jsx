@@ -13,6 +13,7 @@ import Spinner from '../../components/Spinner/Spinner.jsx';
 import { ApiDateFormat } from '../../utils/DateFormatting.js';
 import Admin from './Admin/index.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { UserType } from '../../components/UserType.jsx';
 
 export default function Home(){
     const { user } = useAuth();
@@ -56,8 +57,15 @@ export default function Home(){
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/account/getByUserId?id=${user.id}`)
             const data = await response.json();
-            console.log(data);
-            setUserInfo(data);
+            
+            // no account associated with this user id
+            if(data === null) {
+                await createAccount();
+            } else {
+                setUserInfo(data);
+            }
+        
+
         } catch (error) {
             setError(error);
             console.log(error);
@@ -69,6 +77,40 @@ export default function Home(){
     useEffect(() => {
         fetchUser();
     }, [])
+
+    const createAccount = async () => {
+        const accountData = {
+            total_balance: -1,  
+            user_id_long: user.id,  
+            knut_balance: 500,  
+            sickle_balance: 500,  
+            galleon_balance: 500
+        }
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(accountData)
+        };
+
+        try {
+            setLoading(true);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/account/create`, settings);
+            if(response.ok) {
+                console.log("Account created");
+                await fetchUser();
+            } else {
+                throw new Error("Failed to create account");
+            }
+        } catch (error) {
+            setError(error);
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     const handleConversion = async () => {
         console.log("clicked");
@@ -144,11 +186,11 @@ export default function Home(){
             <h1>Home</h1>
             {loading && <div className="loadingContainer"><Spinner /></div>}
 
-            {error && <p>Failed to load the page. Please try again.</p>}
+            {(error || !userInfo) && <p>Failed to load the page. Please try again.</p>}
 
-            {!loading && !error && (
+            {!loading && !error && userInfo && (
                 <>
-                    <Welcome userInfo={userInfo} />
+                    <Welcome userInfo={userInfo} userType={UserType}/>
                     <h2 className="sectionMessage">Balance</h2>
                     <Balance userInfo={userInfo}/>
                     <NavButtons />
