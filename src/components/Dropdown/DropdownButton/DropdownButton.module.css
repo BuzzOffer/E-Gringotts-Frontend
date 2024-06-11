@@ -1,0 +1,12 @@
+.dropdownBtn{
+    background-color: var(--background-clr-lighter);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdownBtnOpen{
+    background-color: #355DD4;
+}

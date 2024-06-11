@@ -3,8 +3,41 @@
 :root {
   /* Colors */
   --main-background-clr: #0B1432;
+  --background-clr-lighter: #172141;
   --primary-clr: #DFA616;
   --gray-placeholder-clr: #A1A1A1;
+  
+  --dark-blue: #0B1432;
+  --medium-blue: #172964;
+  --light-blue: #1E3685;
+  --lighter-blue: #2A4BB7;
+  --lightest-blue: #355DD4;
+  --dark-yellow: #DFA616;
+  --medium-yellow: #EBB733;
+  --light-yellow: #EEC458;
+  --lighter-yellow: #F4D890;
+  --lightest-yellow: #F8E5B5;
+  --white: #FFFFFF;
+
+  /* Date Picker */
+  --rdp-accent-color: red;
+  .rdp-day_today:not(.rdp-day_outside) {
+    font-weight: bold;
+    color: var(--primary-clr);
+  }
+
+  .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+    background-color: #000925;
+  }
+
+  .rdp-day_selected,
+  .rdp-day_selected:focus-visible,
+  .rdp-day_selected:hover {
+    color: var(--rdp-selected-color);
+    opacity: 1;
+    background-color: #000925;
+  }
+  
 }
 
 @font-face {

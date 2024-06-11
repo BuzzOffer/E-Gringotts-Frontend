@@ -1,0 +1,15 @@
+.addAccountContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+.addBtn {
+    border: 0;
+    background-color: var(--primary-clr);
+    border-radius: 1rem;
+    color: white;
+    padding: 0 1rem;
+    cursor: pointer;
+}

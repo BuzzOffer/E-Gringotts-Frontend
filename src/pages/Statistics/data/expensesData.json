@@ -1,0 +1,18 @@
+[
+    {
+        "label": "Entertainment",
+        "value": 500
+    },
+    {
+        "label": "Food",
+        "value": 1200
+    },
+    {
+        "label": "Game",
+        "value": 850
+    },
+    {
+        "label": "Misc",
+        "value": 1050
+    }
+]
