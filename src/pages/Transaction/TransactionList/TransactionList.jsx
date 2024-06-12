@@ -19,6 +19,9 @@ export default function TransactionList({ transactions, id, error, loading }){
     }
 
     const capitalize = (s) => {
+        if(s === null){
+            return s;
+        }
         return s[0].toUpperCase() + s.slice(1).toLowerCase();
     }
     

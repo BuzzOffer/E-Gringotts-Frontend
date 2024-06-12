@@ -4,9 +4,9 @@ import styles from "./Transaction.module.css";
 import TransactionList from "./TransactionList/TransactionList";
 import { ApiDateFormat } from "../../utils/DateFormatting";
 import { useAuth } from "../../context/AuthContext";
+import { categories } from "../../components/categories";
 
 const lastNDays = [15, 10, 5];
-const categories = ["Entertainment", "Food", "Misc.", "Game"]
 const types = ["Sent", "Receive", "Convert"];
 
 export default function Transaction(){
@@ -52,6 +52,7 @@ export default function Transaction(){
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/getTransactionByIdDateTime?id=${accountId}&start=${ApiDateFormat(start)}&end=${ApiDateFormat(today)}`);
 
                 const data = await response.json();
+                data.sort((a, b) => new Date(a.date_time) - new Date(b.date_time)); // Sort transactions by date_time
                 data.reverse();
                 setTransactions(data);
                 setFilteredTransactions(data);
