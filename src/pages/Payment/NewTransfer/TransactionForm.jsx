@@ -9,8 +9,7 @@ import './TransactionForm.css'; // Make sure to import the CSS
 import Dropdown from '../../../components/Dropdown/Dropdown';
 import { useAuth } from '../../../context/AuthContext';
 import LoadingOverlay from '../../../components/LoadingOverlay/LoadingOverlay';
-
-const categories = ["Entertainment", "Food", "Misc.", "Game"];
+import { categories } from '../../../components/categories';
 
 const ErrorMessage = ({ error }) => {
   return <p className="error">{error}</p>
